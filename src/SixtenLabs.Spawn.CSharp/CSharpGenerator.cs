@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using System;
 using SF = Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace SixtenLabs.Spawn.CSharp
@@ -7,7 +8,7 @@ namespace SixtenLabs.Spawn.CSharp
 	public class CSharpGenerator : CodeGenerator
 	{
 		public CSharpGenerator(ISpawnService spawn)
-			: base(spawn)
+			: base(spawn, LanguageNames.CSharp)
 		{
 		}
 
@@ -41,11 +42,11 @@ namespace SixtenLabs.Spawn.CSharp
 		public string GenerateStruct(OutputDefinition outputDefinition, StructDefinition structDefinition)
 		{
 			var code = SF.CompilationUnit()
-
 				.AddUsingDirectives(outputDefinition.Usings)
+				.WithLeadingTrivia(structDefinition.Comments.HasComments ? structDefinition.Comments.GetComments() : SF.TriviaList())
 				.AddStruct(outputDefinition, structDefinition)
 				.WithEndOfFileToken(SF.Token(SyntaxKind.EndOfFileToken))
-				.NormalizeWhitespace();
+				.NormalizeWhitespace(indentation: "    ");
 
 			var contents = code.GetFormattedCode();
 			AddToProject(outputDefinition, contents);

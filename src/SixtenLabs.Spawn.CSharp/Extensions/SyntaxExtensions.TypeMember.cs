@@ -21,6 +21,37 @@ namespace SixtenLabs.Spawn.CSharp
 			return equalsSyntax;
 		}
 
+		public static ConstructorDeclarationSyntax AddConstructor(ConstructorDefinition constructorDefinition)
+		{
+			var modifiers = GetModifierTokens(constructorDefinition.ModifierDefinitions);
+
+			var returnTypeString = constructorDefinition.TranslatedReturnType;
+			var attributes = GetAttributes(constructorDefinition.Attributes);
+			var parameters = GetParameters(constructorDefinition.Parameters);
+			var body = CreateBlock(constructorDefinition.Block);
+
+			var constructorDeclaration = SF.ConstructorDeclaration(SF.Identifier(constructorDefinition.TranslatedName))
+				.WithModifiers(modifiers)
+				.WithAttributeLists(SF.SingletonList(attributes))
+				.WithParameterList(parameters)
+				.WithBody(body);
+
+			return constructorDeclaration;
+		}
+
+		public static IList<ConstructorDeclarationSyntax> AddConstructors(IList<ConstructorDefinition> constructorDefinitions)
+		{
+			var list = new List<ConstructorDeclarationSyntax>();
+
+			foreach (var constructorDefinition in constructorDefinitions)
+			{
+				var constructorDeclarationSyntax = AddConstructor(constructorDefinition);
+				list.Add(constructorDeclarationSyntax);
+			}
+
+			return list;
+		}
+
 		public static FieldDeclarationSyntax AddField(FieldDefinition fieldDefinition)
 		{
 			if(string.IsNullOrEmpty(fieldDefinition.TranslatedReturnType))

@@ -7,10 +7,6 @@ namespace SixtenLabs.Spawn.CSharp
 	{
 		public AccessorDefinition()
 		{
-			//if (accessorType != SyntaxKind.GetAccessorDeclaration && accessorType != SyntaxKind.SetAccessorDeclaration)
-			//{
-			//	throw new ArgumentOutOfRangeException("Parameter must be SyntaxKind.GetAccessorDeclaration or SyntaxKind.SetAccessorDeclaration");
-			//}
     }
 
 		public void AddBlock(BlockDefinition block)

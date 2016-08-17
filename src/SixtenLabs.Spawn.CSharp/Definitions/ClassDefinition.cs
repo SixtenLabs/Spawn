@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Microsoft.CodeAnalysis.CSharp;
+﻿using System.Collections.Generic;
 
 namespace SixtenLabs.Spawn.CSharp
 {
@@ -64,6 +58,8 @@ namespace SixtenLabs.Spawn.CSharp
 		public string SpecDerivedType { get; set; }
 
 		public string DerivedType { get; set; }
+
+		public List<ConstructorDefinition> Constructors { get; set; } = new List<ConstructorDefinition>();
 
 		public IList<FieldDefinition> Fields { get; set; } = new List<FieldDefinition>();
 

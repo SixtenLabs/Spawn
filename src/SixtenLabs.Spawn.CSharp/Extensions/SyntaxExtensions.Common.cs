@@ -199,6 +199,11 @@ namespace SixtenLabs.Spawn.CSharp
 			{
 				expression = SF.LiteralExpression(SyntaxKind.NumericLiteralExpression, SF.Literal(Convert.ToUInt16(literalDefinition.Value)));
 			}
+			else if(literalDefinition.LiteralType == null)
+			{
+				// I guess it is much more complex to do a new object initializer.
+				expression = SF.LiteralExpression(SyntaxKind.TrueLiteralExpression, SF.Literal(literalDefinition.Value));
+			}
 
 			return expression;
 		}

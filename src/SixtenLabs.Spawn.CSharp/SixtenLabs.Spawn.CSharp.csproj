@@ -183,6 +183,7 @@
     <Compile Include="Definitions\BlockDefinition.cs" />
     <Compile Include="Definitions\ClassDefinition.cs" />
     <Compile Include="Definitions\CommentDefinition.cs" />
+    <Compile Include="Definitions\ConstructorDefinition.cs" />
     <Compile Include="Definitions\Definition.cs" />
     <Compile Include="Definitions\DelegateDefinition.cs" />
     <Compile Include="Definitions\EnumDefinition.cs" />
@@ -202,12 +203,22 @@
     <Compile Include="Definitions\TypeDefinition.cs" />
     <Compile Include="Definitions\TypeMemberDefinition.cs" />
     <Compile Include="Definitions\UsingDirectiveDefinition.cs" />
-    <Compile Include="Extensions\SyntaxExtensions.Class.cs" />
-    <Compile Include="Extensions\SyntaxExtensions.Common.cs" />
+    <Compile Include="Extensions\SyntaxExtensions.Class.cs">
+      <DependentUpon>SyntaxExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\SyntaxExtensions.Common.cs">
+      <DependentUpon>SyntaxExtensions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\SyntaxExtensions.cs" />
-    <Compile Include="Extensions\SyntaxExtensions.Enums.cs" />
-    <Compile Include="Extensions\SyntaxExtensions.Struct.cs" />
-    <Compile Include="Extensions\SyntaxExtensions.TypeMember.cs" />
+    <Compile Include="Extensions\SyntaxExtensions.Enums.cs">
+      <DependentUpon>SyntaxExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\SyntaxExtensions.Struct.cs">
+      <DependentUpon>SyntaxExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\SyntaxExtensions.TypeMember.cs">
+      <DependentUpon>SyntaxExtensions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyntaxKindDto.cs" />
   </ItemGroup>

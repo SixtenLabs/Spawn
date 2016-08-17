@@ -17,10 +17,9 @@ namespace SixtenLabs.Spawn.CSharp
 			var memberList = SF.List<MemberDeclarationSyntax>();
 
 			var fields = AddFields(structDefinition.Fields);
-			//var properties = AddProperties(structDefinition.Properties);
-
+			var constructors = AddConstructors(structDefinition.Constructors);
+			memberList = memberList.AddRange(constructors);
 			memberList = memberList.AddRange(fields);
-			//memberList = memberList.AddRange(properties);
 
 			var nameSpaceDeclaration = AddNamespace(outputDefinition.Namespace);
 			var modifierTokens = GetModifierTokens(structDefinition.ModifierDefinitions);
@@ -51,7 +50,6 @@ namespace SixtenLabs.Spawn.CSharp
 			{
 				return compilationUnit.AddMembers(structDeclaration);
 			}
-
 		}
 	}
 }

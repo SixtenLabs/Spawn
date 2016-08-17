@@ -4,6 +4,7 @@ using NSubstitute;
 using System;
 
 using static System.Environment;
+using Microsoft.CodeAnalysis.MSBuild;
 
 namespace SixtenLabs.Spawn.CSharp.Tests
 {
@@ -12,6 +13,7 @@ namespace SixtenLabs.Spawn.CSharp.Tests
 		private CSharpGenerator NewSubjectUnderTest()
 		{
 			MockSpawnService = Substitute.For<ISpawnService>();
+			MockSpawnService.Workspace.Returns(MSBuildWorkspace.Create());
 
 			return new CSharpGenerator(MockSpawnService);
 		}

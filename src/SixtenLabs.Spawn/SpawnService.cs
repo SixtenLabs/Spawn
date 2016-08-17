@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Editing;
 using Microsoft.CodeAnalysis.MSBuild;
 using Microsoft.CodeAnalysis.Text;
 using System;
@@ -15,15 +16,16 @@ namespace SixtenLabs.Spawn
 
 		private void OpenWorkspace()
 		{
-			Workspace = MSBuildWorkspace.Create();
-			var solution = Workspace.OpenSolutionAsync(SolutionPath).Result;
+			var workspace = MSBuildWorkspace.Create();
+			var solution = workspace.OpenSolutionAsync(SolutionPath).Result;
+			Workspace = workspace;
 		}
 
 		private Project GetProject(string projectName)
 		{
 			var newSolution = Workspace.CurrentSolution;
 			var project = newSolution.Projects.Where(x => x.Name == projectName).FirstOrDefault();
-
+			
 			return project;
 		}
 
@@ -74,7 +76,7 @@ namespace SixtenLabs.Spawn
 			ApplyChanges(newDocument.Project.Solution);
     }
 
-		private MSBuildWorkspace Workspace { get; set; }
+		public Workspace Workspace { get; private set; }
 
 		private string SolutionPath { get; set; }
 	}
