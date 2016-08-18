@@ -178,6 +178,7 @@
   <ItemGroup>
     <Compile Include="CSharpGenerator.cs" />
     <Compile Include="Definitions\AccessorDefinition.cs" />
+    <Compile Include="Definitions\ArgumentDefinition.cs" />
     <Compile Include="Definitions\AttributeDefinition.cs" />
     <Compile Include="Definitions\BaseTypeDefinition.cs" />
     <Compile Include="Definitions\BlockDefinition.cs" />
@@ -203,10 +204,62 @@
     <Compile Include="Definitions\TypeDefinition.cs" />
     <Compile Include="Definitions\TypeMemberDefinition.cs" />
     <Compile Include="Definitions\UsingDirectiveDefinition.cs" />
-    <Compile Include="Extensions\SyntaxExtensions.Class.cs">
-      <DependentUpon>SyntaxExtensions.cs</DependentUpon>
+    <Compile Include="Extensions\DefinitionExtensions.Accessor.cs">
+      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Extensions\SyntaxExtensions.Common.cs">
+    <Compile Include="Extensions\DefinitionExtensions.Argument.cs">
+      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\DefinitionExtensions.Attribute.cs">
+      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\DefinitionExtensions.Block.cs">
+      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\DefinitionExtensions.Class.cs">
+      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\DefinitionExtensions.Comment.cs">
+      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\DefinitionExtensions.Constructor.cs">
+      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\DefinitionExtensions.cs" />
+    <Compile Include="Extensions\DefinitionExtensions.Enum.cs">
+      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\DefinitionExtensions.EnumMember.cs">
+      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\DefinitionExtensions.Field.cs">
+      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\DefinitionExtensions.Literal.cs">
+      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\DefinitionExtensions.Method.cs">
+      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\DefinitionExtensions.Modifier.cs">
+      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\DefinitionExtensions.Namesapce.cs">
+      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\DefinitionExtensions.Parameter.cs">
+      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\DefinitionExtensions.Property.cs">
+      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\DefinitionExtensions.Struct.cs">
+      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\DefinitionExtensions.UsingDirective.cs">
+      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\SyntaxExtensions.Class.cs">
       <DependentUpon>SyntaxExtensions.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions\SyntaxExtensions.cs" />
@@ -214,9 +267,6 @@
       <DependentUpon>SyntaxExtensions.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions\SyntaxExtensions.Struct.cs">
-      <DependentUpon>SyntaxExtensions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Extensions\SyntaxExtensions.TypeMember.cs">
       <DependentUpon>SyntaxExtensions.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

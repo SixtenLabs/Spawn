@@ -1,14 +1,14 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using System;
 using SF = Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
+using SixtenLabs.Spawn.CSharp.Extensions;
 
 namespace SixtenLabs.Spawn.CSharp
 {
 	public class CSharpGenerator : CodeGenerator
 	{
 		public CSharpGenerator(ISpawnService spawn)
-			: base(spawn, LanguageNames.CSharp)
+			: base(spawn)
 		{
 		}
 
@@ -21,7 +21,6 @@ namespace SixtenLabs.Spawn.CSharp
 		public string GenerateClass(OutputDefinition outputDefinition, ClassDefinition classDefinition)
 		{
 			var code = SF.CompilationUnit()
-
 				.AddUsingDirectives(outputDefinition.Usings)
 				.AddClass(outputDefinition, classDefinition)
 				.WithEndOfFileToken(SF.Token(SyntaxKind.EndOfFileToken))
@@ -43,7 +42,7 @@ namespace SixtenLabs.Spawn.CSharp
 		{
 			var code = SF.CompilationUnit()
 				.AddUsingDirectives(outputDefinition.Usings)
-				.WithLeadingTrivia(structDefinition.Comments.HasComments ? structDefinition.Comments.GetComments() : SF.TriviaList())
+				.WithLeadingTrivia(structDefinition.Comments.HasComments ? structDefinition.Comments.GetCommentTriviaSyntax() : SF.TriviaList())
 				.AddStruct(outputDefinition, structDefinition)
 				.WithEndOfFileToken(SF.Token(SyntaxKind.EndOfFileToken))
 				.NormalizeWhitespace(indentation: "    ");

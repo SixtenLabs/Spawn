@@ -210,14 +210,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseCreatorTests.cs" />
-    <Compile Include="CodeGeneratorFixture.cs" />
-    <Compile Include="CodeGeneratorTests.Class.cs">
-      <DependentUpon>CodeGeneratorTests.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CodeGeneratorTests.cs" />
-    <Compile Include="CodeGeneratorTests.Enum.cs">
-      <DependentUpon>CodeGeneratorTests.cs</DependentUpon>
-    </Compile>
     <Compile Include="Extensions\StringExtensionTests.cs" />
     <Compile Include="GeneratorSettingsTest.cs" />
     <Compile Include="MockClasses\TestCreator.cs" />

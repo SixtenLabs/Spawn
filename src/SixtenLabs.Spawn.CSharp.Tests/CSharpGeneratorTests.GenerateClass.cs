@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SixtenLabs.Spawn
+namespace SixtenLabs.Spawn.CSharp.Tests
 {
-	public static partial class SyntaxExtensions
-	{
-	}
+  public partial class CSharpGeneratorTests
+  {
+  }
 }

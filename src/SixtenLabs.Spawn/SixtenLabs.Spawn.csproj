@@ -185,47 +185,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Definitions\ClassDefinition.cs" />
-    <Compile Include="Definitions\ConstructorDefinition.cs" />
-    <Compile Include="Definitions\Definition.cs" />
-    <Compile Include="Definitions\EnumDefinition.cs" />
-    <Compile Include="Definitions\EnumMemberDefinition.cs" />
-    <Compile Include="Definitions\FieldDefinition.cs" />
-    <Compile Include="Definitions\MethodDefinition.cs" />
-    <Compile Include="Definitions\NamespaceDefinition.cs" />
-    <Compile Include="Definitions\OutputDefinition.cs" />
-    <Compile Include="Definitions\ParameterDefinition.cs" />
-    <Compile Include="Definitions\PropertyDefinition.cs" />
-    <Compile Include="Definitions\StructDefinition.cs" />
-    <Compile Include="Definitions\UsingDirectiveDefinition.cs" />
-    <Compile Include="Extensions\DefinitionExtensions.Class.cs">
-      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Extensions\DefinitionExtensions.Constructor.cs">
-      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Extensions\DefinitionExtensions.cs" />
-    <Compile Include="Extensions\DefinitionExtensions.Enum.cs">
-      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Extensions\DefinitionExtensions.Field.cs">
-      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Extensions\DefinitionExtensions.Output.cs">
-      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Extensions\DefinitionExtensions.Parameter.cs">
-      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Extensions\DefinitionExtensions.UsingDirective.cs">
-      <DependentUpon>DefinitionExtensions.cs</DependentUpon>
-    </Compile>
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="CodeGenerator.cs" />
-    <Compile Include="Extensions\SyntaxExtensions.cs" />
-    <Compile Include="Extensions\SyntaxExtensions.SyntaxNode.cs">
-      <DependentUpon>SyntaxExtensions.cs</DependentUpon>
-    </Compile>
     <Compile Include="Interfaces\ICodeGenerator.cs" />
     <Compile Include="Interfaces\IDefinition.cs" />
     <Compile Include="Interfaces\IOutputDefinition.cs" />

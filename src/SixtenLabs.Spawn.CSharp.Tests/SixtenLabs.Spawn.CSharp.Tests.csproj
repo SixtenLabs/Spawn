@@ -204,9 +204,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GenerateClassTests.cs" />
-    <Compile Include="GenerateEnumTests.cs" />
-    <Compile Include="GenerateStructTests.cs" />
+    <Compile Include="CSharpGeneratorTests.cs" />
+    <Compile Include="CSharpGeneratorTests.GenerateClass.cs">
+      <DependentUpon>CSharpGeneratorTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CSharpGeneratorTests.GenerateEnum.cs">
+      <DependentUpon>CSharpGeneratorTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CSharpGeneratorTests.GenerateStruct.cs">
+      <DependentUpon>CSharpGeneratorTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratorFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
