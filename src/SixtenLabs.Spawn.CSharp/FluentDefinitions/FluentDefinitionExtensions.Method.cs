@@ -11,5 +11,12 @@ namespace SixtenLabs.Spawn.CSharp.FluentDefinitions
   /// </summary>
   public static partial class FluentDefinitionExtensions
   {
+    public static MethodDefinition AddModifier(this MethodDefinition definition, SyntaxKindDto kind)
+    {
+      var modifierDefinition = new ModifierDefinition() { Modifier = kind };
+      definition.ModifierDefinitions.Add(modifierDefinition);
+
+      return definition;
+    }
   }
 }

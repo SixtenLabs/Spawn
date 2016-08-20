@@ -30,5 +30,13 @@
 
       return classDefinition;
     }
+
+    public static ClassDefinition AddModifier(this ClassDefinition definition, SyntaxKindDto kind)
+    {
+      var modifierDefinition = new ModifierDefinition() { Modifier = kind };
+      definition.ModifierDefinitions.Add(modifierDefinition);
+
+      return definition;
+    }
   }
 }
