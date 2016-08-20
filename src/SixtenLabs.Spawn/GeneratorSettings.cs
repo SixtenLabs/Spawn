@@ -7,7 +7,7 @@ namespace SixtenLabs.Spawn
 	/// </summary>
 	public abstract class GeneratorSettings : IGeneratorSettings
 	{
-		public GeneratorSettings(string targetSolutionName, string rootNamespace, string fileName, string webUri, string version, string langauge, XmlLoadMethod loadMethod = XmlLoadMethod.FromUri)
+		public GeneratorSettings(string targetSolutionName, string rootNamespace, string fileName, string webUri, string version, XmlLoadMethod loadMethod = XmlLoadMethod.FromUri)
 		{
 			TargetSolutionName = targetSolutionName;
 			RootNamespace = rootNamespace;
@@ -15,7 +15,6 @@ namespace SixtenLabs.Spawn
 			WebUri = webUri;
 			LoadMethod = loadMethod;
 			VersionToGenerate = version;
-			Language = Language;
 
 			SetRootDirectory();
 		}
@@ -48,7 +47,5 @@ namespace SixtenLabs.Spawn
 		public string TargetSolutionName { get; }
 
 		public string VersionToGenerate { get; }
-
-		public string Language { get; }
 	}
 }
