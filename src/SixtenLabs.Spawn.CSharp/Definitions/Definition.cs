@@ -5,38 +5,12 @@
 	/// </summary>
   public abstract class Definition
   {
-		/// <summary>
-		/// This name is typically the name used for this definition in the source data file.
-		/// This is required. This value will also be used for the Translated name if the translated name is not set.
-		/// </summary>
-    public string SpecName { get; set; }
+    public Definition(string name = null)
+    {
+      Name.OriginalName = name;
+    }
 
-		private string translatedName;
-
-		/// <summary>
-		/// This is the name that will be used by the generator for this definition.
-		/// So if this is a class definition this will be the generated class name.
-		/// If this is not set it will use the spec name.
-		/// </summary>
-		public string TranslatedName
-		{
-			get
-			{
-				if (string.IsNullOrEmpty(translatedName))
-				{
-					return SpecName;
-				}
-				else
-				{
-					return translatedName;
-				}
-			}
-
-			set
-			{
-				translatedName = value;
-			}
-		}
+    public DefinitionName Name { get; } = new DefinitionName();
 
 		/// <summary>
 		/// Use this to capture any information your spec may need.

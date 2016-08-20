@@ -14,7 +14,7 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
 
 		public static CompilationUnitSyntax AddEnum(this CompilationUnitSyntax compilationUnit, OutputDefinition outputDefinition, EnumDefinition enumDefinition)
 		{
-			if(string.IsNullOrEmpty(enumDefinition.SpecName))
+			if(string.IsNullOrEmpty(enumDefinition.Name.Code))
 			{
 				throw new ArgumentNullException("Enum must at least have a valid SpecName property set.");
 			}

@@ -26,7 +26,12 @@ namespace SixtenLabs.Spawn.CSharp
 				.WithEndOfFileToken(SF.Token(SyntaxKind.EndOfFileToken))
 				.NormalizeWhitespace();
 
-			var contents = code.GetFormattedCode();
+      if (classDefinition.Comments.HasComments)
+      {
+        code = code.WithLeadingTrivia(classDefinition.Comments.GetCommentTriviaSyntax());
+      }
+
+      var contents = code.GetFormattedCode();
 			AddToProject(outputDefinition, contents);
 
 			return contents;
@@ -42,12 +47,16 @@ namespace SixtenLabs.Spawn.CSharp
 		{
 			var code = SF.CompilationUnit()
 				.AddUsingDirectives(outputDefinition.Usings)
-				.WithLeadingTrivia(structDefinition.Comments.HasComments ? structDefinition.Comments.GetCommentTriviaSyntax() : SF.TriviaList())
 				.AddStruct(outputDefinition, structDefinition)
 				.WithEndOfFileToken(SF.Token(SyntaxKind.EndOfFileToken))
 				.NormalizeWhitespace(indentation: "    ");
 
-			var contents = code.GetFormattedCode();
+      if (structDefinition.Comments.HasComments)
+      {
+        code = code.WithLeadingTrivia(structDefinition.Comments.GetCommentTriviaSyntax());
+      }
+
+      var contents = code.GetFormattedCode();
 			AddToProject(outputDefinition, contents);
 
 			return contents;
@@ -63,9 +72,14 @@ namespace SixtenLabs.Spawn.CSharp
 		{
 			var code = SF.CompilationUnit()
 				.AddUsingDirectives(outputDefinition.Usings)
-				.AddEnum(outputDefinition, enumDefinition)
+        .AddEnum(outputDefinition, enumDefinition)
 				.WithEndOfFileToken(SF.Token(SyntaxKind.EndOfFileToken))
 				.NormalizeWhitespace();
+
+      if(enumDefinition.Comments.HasComments)
+      {
+        code = code.WithLeadingTrivia(enumDefinition.Comments.GetCommentTriviaSyntax());
+      }
 
 			var contents = code.GetFormattedCode();
 			AddToProject(outputDefinition, contents);

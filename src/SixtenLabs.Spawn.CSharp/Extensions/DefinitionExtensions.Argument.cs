@@ -17,7 +17,7 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
     /// <returns></returns>
     public static ArgumentSyntax CreateArgument(this ArgumentDefinition argumentDefinition)
     {
-      var name = SF.IdentifierName(argumentDefinition.TranslatedName);
+      var name = SF.IdentifierName(argumentDefinition.Name.Code);
 
       return SF.Argument(name);
     }

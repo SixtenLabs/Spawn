@@ -2,24 +2,24 @@
 
 namespace SixtenLabs.Spawn.CSharp
 {
-	public class ConstructorDefinition : TypeMemberDefinition
+	public class ConstructorDefinition : Definition
 	{
-		public ConstructorDefinition()
+    public ConstructorDefinition(string name = null)
+      : base(name)
+    {
+    }
+
+    public void AddCodeLineToBody(string code)
 		{
-
-		}
-
-		public void AddCodeLineToBody(string code)
-		{
-			if (Block == null)
-			{
-				var body = new BlockDefinition() { SpecName = "body" };
-				AddBlock(body);
-			}
-
 			Block.AddStatement(code);
 		}
 
-		public List<AttributeDefinition> Attributes { get; set; } = new List<AttributeDefinition>();
-	}
+    public BlockDefinition Block { get; set; } = new BlockDefinition();
+
+    public List<AttributeDefinition> Attributes { get; set; } = new List<AttributeDefinition>();
+
+    public List<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
+
+    public List<ParameterDefinition> Parameters { get; set; } = new List<ParameterDefinition>();
+  }
 }

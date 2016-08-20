@@ -9,11 +9,6 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
   {
     public static StructDeclarationSyntax CreateStructDeclaration(this StructDefinition structDefinition)
     {
-      if (string.IsNullOrEmpty(structDefinition.SpecName))
-      {
-        throw new ArgumentNullException("Struct must at least have a valid SpecName property set.");
-      }
-
       var memberList = SF.List<MemberDeclarationSyntax>();
 
       var fields = structDefinition.Fields.GetFieldDeclarations();
@@ -30,7 +25,7 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
         modifierTokens.Insert(0, SF.Token(comments, SyntaxKind.XmlTextLiteralToken, SF.TriviaList()));
       }
 
-      var structDeclaration = SF.StructDeclaration(structDefinition.TranslatedName)
+      var structDeclaration = SF.StructDeclaration(structDefinition.Name.Code)
         .WithModifiers(modifierTokens)
         .WithMembers(memberList);
 

@@ -5,8 +5,9 @@ namespace SixtenLabs.Spawn.CSharp
 {
   public class LiteralDefinition : Definition
   {
-    public LiteralDefinition()
-		{
+    public LiteralDefinition(string name = null)
+      : base(name)
+    {
     }
 
     public string Value { get; set; }

@@ -3,6 +3,7 @@ using FluentAssertions;
 
 using System;
 using static System.Environment;
+using SixtenLabs.Spawn.CSharp.FluentDefinitions;
 
 namespace SixtenLabs.Spawn.CSharp.Tests
 {
@@ -27,7 +28,7 @@ namespace SixtenLabs.Spawn.CSharp.Tests
       var subject = Fixture.NewSubjectUnderTest();
 
       var output = new OutputDefinition();
-      var enumDef = new EnumDefinition() { SpecName = "FancyEnum" };
+      var enumDef = new EnumDefinition("FancyEnum");
 
       var actual = subject.GenerateEnum(output, enumDef);
 
@@ -40,7 +41,7 @@ namespace SixtenLabs.Spawn.CSharp.Tests
       var subject = Fixture.NewSubjectUnderTest();
 
       var output = new OutputDefinition();
-      var enumDef = new EnumDefinition() { SpecName = "FancyEnum", BaseType = SyntaxKindDto.UIntKeyword };
+      var enumDef = new EnumDefinition("FancyEnum") { BaseType = SyntaxKindDto.UIntKeyword };
 
       var actual = subject.GenerateEnum(output, enumDef);
 
@@ -48,27 +49,13 @@ namespace SixtenLabs.Spawn.CSharp.Tests
     }
 
     [Fact]
-    public void GenerateEnum_HasFlagsTrue_FlagsAttributeSet()
-    {
-      var subject = Fixture.NewSubjectUnderTest();
-
-      var output = new OutputDefinition();
-      var enumDef = new EnumDefinition() { SpecName = "FancyEnum", HasFlags = true };
-
-      var actual = subject.GenerateEnum(output, enumDef);
-
-      actual.Should().Be($"[Flags]{NewLine}enum FancyEnum{NewLine}{{{NewLine}}}");
-    }
-
-    [Fact]
     public void GenerateEnum_HasNamespace_NamespaceGenerated()
     {
       var subject = Fixture.NewSubjectUnderTest();
 
-      var namespaceDef = new NamespaceDefinition() { SpecName = "SixtenLabs.EnumTest" };
+      var namespaceDef = new NamespaceDefinition("SixtenLabs.EnumTest");
       var output = new OutputDefinition() { Namespace = namespaceDef };
-      var enumDef = new EnumDefinition() { SpecName = "FancyEnum" };
-
+      var enumDef = new EnumDefinition("FancyEnum");
 
       var actual = subject.GenerateEnum(output, enumDef);
 
@@ -81,8 +68,7 @@ namespace SixtenLabs.Spawn.CSharp.Tests
       var subject = Fixture.NewSubjectUnderTest();
 
       var output = new OutputDefinition();
-      var enumDef = new EnumDefinition() { SpecName = "FancyEnum" };
-      enumDef.AddModifier(SyntaxKindDto.PublicKeyword);
+      var enumDef = new EnumDefinition("FancyEnum").AddModifier(SyntaxKindDto.PublicKeyword);
 
       var actual = subject.GenerateEnum(output, enumDef);
 
@@ -95,8 +81,7 @@ namespace SixtenLabs.Spawn.CSharp.Tests
       var subject = Fixture.NewSubjectUnderTest();
 
       var output = new OutputDefinition();
-      var enumDef = new EnumDefinition() { SpecName = "FancyEnum" };
-      enumDef.Members.Add(new EnumMemberDefinition() { SpecName = "None", Value = "0" });
+      var enumDef = new EnumDefinition("FancyEnum").AddEnumMember("None", "0");
 
       var actual = subject.GenerateEnum(output, enumDef);
 
@@ -109,13 +94,72 @@ namespace SixtenLabs.Spawn.CSharp.Tests
       var subject = Fixture.NewSubjectUnderTest();
 
       var output = new OutputDefinition();
-      var enumDef = new EnumDefinition() { SpecName = "FancyEnum" };
-      enumDef.Members.Add(new EnumMemberDefinition() { SpecName = "None", Value = "0" });
-      enumDef.Members.Add(new EnumMemberDefinition() { SpecName = "One", Value = "0x01" });
+      var enumDef = new EnumDefinition("FancyEnum")
+        .AddEnumMember("None", "0")
+        .AddEnumMember("One", "0x01");
 
       var actual = subject.GenerateEnum(output, enumDef);
 
       actual.Should().Be($"enum FancyEnum{NewLine}{{{NewLine}    None = 0,{NewLine}    One = 0x01{NewLine}}}");
+    }
+
+    [Fact]
+    public void GenerateEnum_TwoEnumValuesWithComments_OutputCorrect()
+   
+    {
+      var subject = Fixture.NewSubjectUnderTest();
+
+      var output = new OutputDefinition();
+      var enumDef = new EnumDefinition("FancyEnum")
+        .AddEnumMember("None", "0", "Zero")
+        .AddEnumMember("One", "0x01", "One");
+
+      var actual = subject.GenerateEnum(output, enumDef);
+
+      actual.Should().Be($"enum FancyEnum{NewLine}{{{NewLine}    /// <summary>\r\n        /// Zero\r\n        /// </summary>\r\n    None = 0,{NewLine}    /// <summary>\r\n        /// One\r\n        /// </summary>\r\n    One = 0x01{NewLine}}}");
+    }
+
+
+    [Fact]
+    public void GenerateEnum_Attribute_OutputCorrect()
+    {
+      var subject = Fixture.NewSubjectUnderTest();
+
+      var output = new OutputDefinition();
+      var enumDef = new EnumDefinition("FancyEnum")
+        .AddModifier(SyntaxKindDto.PublicKeyword)
+        .AddAttribute("Flags");
+
+      var actual = subject.GenerateEnum(output, enumDef);
+
+      actual.Should().Be($"[Flags()]{NewLine}public enum FancyEnum{NewLine}{{{NewLine}}}");
+    }
+
+    [Fact]
+    public void GenerateEnum_WithFlagsAttribute_OutputCorrect()
+    {
+      var subject = Fixture.NewSubjectUnderTest();
+
+      var output = new OutputDefinition();
+      var enumDef = new EnumDefinition("FancyEnum").WithFlagsAttribute();
+
+      var actual = subject.GenerateEnum(output, enumDef);
+
+      actual.Should().Be($"[Flags()]{NewLine}enum FancyEnum{NewLine}{{{NewLine}}}");
+    }
+
+    [Fact]
+    public void GenerateEnum_WithComments_OutputCorrect()
+    {
+      var subject = Fixture.NewSubjectUnderTest();
+
+      var output = new OutputDefinition();
+      var enumDef = new EnumDefinition("FancyEnum");
+      enumDef.AddModifier(SyntaxKindDto.PublicKeyword).WithComments("line 1");
+
+      var actual = subject.GenerateEnum(output, enumDef);
+
+      actual.Should().Be($"/// <summary>{NewLine}/// line 1{NewLine}/// </summary>{NewLine}public enum FancyEnum{NewLine}{{{NewLine}}}");
     }
   }
 }

@@ -12,18 +12,18 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
   {
     public static FieldDeclarationSyntax CreateFieldDeclaration(this FieldDefinition fieldDefinition)
     {
-      if (string.IsNullOrEmpty(fieldDefinition.TranslatedReturnType))
+      if (string.IsNullOrEmpty(fieldDefinition.ReturnType.Code))
       {
         throw new ArgumentNullException("Field must have a return type.");
       }
 
       var modifiers = fieldDefinition.ModifierDefinitions.GetModifierTokens();
 
-      var returnTypeString = fieldDefinition.TranslatedReturnType;
+      var returnTypeString = fieldDefinition.ReturnType.Code;
       var returnType = SF.VariableDeclaration(SF.IdentifierName(returnTypeString));
-      var fieldName = SF.VariableDeclarator(SF.Identifier(fieldDefinition.TranslatedName));
+      var fieldName = SF.VariableDeclarator(SF.Identifier(fieldDefinition.Name.Code));
       var initializer = fieldDefinition.DefaultValue.GetInitializer();
-      var attributes = fieldDefinition.Attributes.GetAttributeDeclarations();
+      var attributes = fieldDefinition.AttributeDefinitions.GetAttributeDeclarations();
 
       fieldName = fieldName.WithInitializer(initializer);
 
@@ -31,7 +31,7 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
         .AddVariables(fieldName))
         .WithModifiers(modifiers);
 
-      if (fieldDefinition.Attributes.Count > 0)
+      if (fieldDefinition.AttributeDefinitions.Count > 0)
       {
         fieldDeclaration = fieldDeclaration.WithAttributeLists(SF.SingletonList(attributes));
       }

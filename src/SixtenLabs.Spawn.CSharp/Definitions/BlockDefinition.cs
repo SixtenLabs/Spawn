@@ -8,15 +8,24 @@ namespace SixtenLabs.Spawn.CSharp
 {
 	public class BlockDefinition : Definition
 	{
-		public BlockDefinition()
-		{
-		}
+    public BlockDefinition(string name = null)
+      : base(name)
+    {
+    }
 
-		public void AddStatement(string code)
+    public void AddStatement(string code)
 		{
-			var definition = new StatementDefinition() { SpecName = "statement", Code = code };
+			var definition = new StatementDefinition("statement") { Code = code };
 			Statements.Add(definition);
 		}
+
+    public bool IsEmpty
+    {
+      get
+      {
+        return Statements.Count == 0;
+      }
+    }
 
 		public IList<StatementDefinition> Statements { get; set; } = new List<StatementDefinition>();
 	}

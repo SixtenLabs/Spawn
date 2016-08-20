@@ -1,20 +1,24 @@
 ﻿using Microsoft.CodeAnalysis.CSharp;
+using System.Collections.Generic;
 
 namespace SixtenLabs.Spawn.CSharp
 {
-	public class PropertyDefinition : TypeMemberDefinition
+	public class PropertyDefinition : Definition
 	{
-		public PropertyDefinition()
-		{
-		}
+    public PropertyDefinition(string name = null)
+      : base(name)
+    {
+    }
 
-		public AccessorDefinition AddAccessor(SyntaxKind type, SyntaxKind modifier = SyntaxKind.None, string block = null)
+    public DefinitionName ReturnType { get; set; } = new DefinitionName();
+
+    public AccessorDefinition AddAccessor(SyntaxKind type, SyntaxKind modifier = SyntaxKind.None, string block = null)
 		{
 			var accessor = new AccessorDefinition() { AccessorType = type, Modifier = modifier };
 
 			if (!string.IsNullOrEmpty(block))
 			{
-				var blockDefinition = new BlockDefinition() { SpecName = "block" };
+				var blockDefinition = new BlockDefinition("block");
 				blockDefinition.AddStatement(block);
 				accessor.AddBlock(blockDefinition);
 			}
@@ -41,5 +45,9 @@ namespace SixtenLabs.Spawn.CSharp
 		public AccessorDefinition Getter { get; set; }
 
 		public AccessorDefinition Setter { get; set; }
-	}
+
+    public List<AttributeDefinition> AttributeDefinitions { get; set; } = new List<AttributeDefinition>();
+
+    public List<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
+  }
 }

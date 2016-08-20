@@ -32,14 +32,11 @@ namespace SixtenLabs.Spawn.CSharp
 	/// </summary>
 	public class ModifierDefinition : Definition
 	{
-		/// <summary>
-		/// Use this constructor to create a modifier definition
-		/// </summary>
-		/// <param name="modifier">The SyntaxKind to create a modifier for</param>
-		public ModifierDefinition()
+    public ModifierDefinition(string name = null)
+      : base(name)
     {
-		}
+    }
 
-		public SyntaxKindDto Modifier { get; set; }
+    public SyntaxKindDto Modifier { get; set; }
 	}
 }

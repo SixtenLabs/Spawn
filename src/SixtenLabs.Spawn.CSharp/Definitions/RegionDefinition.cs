@@ -5,9 +5,10 @@
 	/// </summary>
 	public class RegionDefinition : Definition
 	{
-		public RegionDefinition()
+    public RegionDefinition(string name = null)
+      : base(name)
     {
-		}
+    }
 
     public bool UseRegionDirective { get; set; }
   }

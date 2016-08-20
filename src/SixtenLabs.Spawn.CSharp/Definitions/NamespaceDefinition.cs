@@ -17,12 +17,9 @@
 	/// </summary>
 	public class NamespaceDefinition : Definition
 	{
-		/// <summary>
-		/// Use this constructor to create a namespace definition
-		/// </summary>
-		/// <param name="@namespace">The name to create a namespace for</param>
-		public NamespaceDefinition()
+    public NamespaceDefinition(string name = null)
+      : base(name)
     {
-		}
-	}
+    }
+  }
 }

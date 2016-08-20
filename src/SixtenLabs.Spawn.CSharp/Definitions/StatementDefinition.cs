@@ -27,10 +27,11 @@
 	/// </summary>
 	public class StatementDefinition : Definition
 	{
-		public StatementDefinition()
-		{
-		}
+    public StatementDefinition(string name = null)
+      : base(name)
+    {
+    }
 
-		public string Code { get; set; }
+    public string Code { get; set; }
 	}
 }

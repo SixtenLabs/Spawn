@@ -24,26 +24,27 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
 
     public static EnumDeclarationSyntax CreateEnumDeclaration(this EnumDefinition enumDefinition)
     {
-      if (string.IsNullOrEmpty(enumDefinition.SpecName))
+      if (string.IsNullOrEmpty(enumDefinition.Name.Code))
       {
         throw new ArgumentNullException("Enum must at least have a valid SpecName property set.");
       }
 
       var members = enumDefinition.GetEnumMembers();
       var modifiers = enumDefinition.ModifierDefinitions.GetModifierTokens();
+      var attributes = enumDefinition.AttributeDefinitions.GetAttributeDeclarations();
 
-      var enumDeclaration = SF.EnumDeclaration(enumDefinition.TranslatedName)
+      var enumDeclaration = SF.EnumDeclaration(enumDefinition.Name.Code)
         .WithModifiers(modifiers)
         .WithMembers(SF.SeparatedList(members));
+
+      if (enumDefinition.AttributeDefinitions.Count > 0)
+      {
+        enumDeclaration = enumDeclaration.WithAttributeLists(SF.SingletonList(attributes));
+      }
 
       if (enumDefinition.BaseType != SyntaxKindDto.None)
       {
         enumDeclaration = enumDeclaration.WithBaseList(SF.BaseList(SF.SingletonSeparatedList<BaseTypeSyntax>(SF.SimpleBaseType(SF.PredefinedType(SF.Token((SyntaxKind)enumDefinition.BaseType))))));
-      }
-
-      if (enumDefinition.HasFlags)
-      {
-        enumDeclaration = enumDeclaration.WithAttributeLists(SF.SingletonList<AttributeListSyntax>(SF.AttributeList(SF.SingletonSeparatedList<AttributeSyntax>(SF.Attribute(SF.IdentifierName("Flags"))))));
       }
 
       return enumDeclaration;

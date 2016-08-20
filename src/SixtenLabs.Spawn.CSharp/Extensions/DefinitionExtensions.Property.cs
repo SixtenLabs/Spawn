@@ -10,11 +10,11 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
     public static PropertyDeclarationSyntax CreatePropertyDeclaration(this PropertyDefinition propertyDefinition)
     {
       var modifiers = GetModifierTokens(propertyDefinition.ModifierDefinitions);
-      var returnType = SF.ParseTypeName(propertyDefinition.TranslatedReturnType);
+      var returnType = SF.ParseTypeName(propertyDefinition.ReturnType.Code);
       var accessors = GetAccessors(propertyDefinition.Getter, propertyDefinition.Setter);
       var initializer = propertyDefinition.DefaultValue.GetInitializer();
 
-      var declaration = SF.PropertyDeclaration(returnType, SF.Identifier(propertyDefinition.TranslatedName))
+      var declaration = SF.PropertyDeclaration(returnType, SF.Identifier(propertyDefinition.Name.Code))
         .WithModifiers(modifiers)
         .WithAccessorList(accessors)
         .WithInitializer(initializer);

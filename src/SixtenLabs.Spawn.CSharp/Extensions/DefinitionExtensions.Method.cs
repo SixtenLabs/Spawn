@@ -11,10 +11,10 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
     {
       var attributes = methodDefinition.Attributes.GetAttributeDeclarations();
       var modifiers = GetModifierTokens(methodDefinition.ModifierDefinitions);
-      var returnType = SF.ParseTypeName(methodDefinition.TranslatedReturnType);
+      var returnType = SF.ParseTypeName(methodDefinition.ReturnType.Code);
       var parameters = methodDefinition.Parameters.GetParameterDeclarations();
 
-      var declaration = SF.MethodDeclaration(returnType, SF.Identifier(methodDefinition.TranslatedName))
+      var declaration = SF.MethodDeclaration(returnType, SF.Identifier(methodDefinition.Name.Code))
         .WithAttributeLists(SF.SingletonList(attributes))
         .WithModifiers(modifiers)
         .WithParameterList(parameters)

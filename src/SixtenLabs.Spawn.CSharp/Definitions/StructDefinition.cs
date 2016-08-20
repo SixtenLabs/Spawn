@@ -20,13 +20,14 @@ namespace SixtenLabs.Spawn.CSharp
 	///   nested types
 	/// 
 	/// </summary>
-	public class StructDefinition : TypeDefinition
+	public class StructDefinition : Definition
 	{
-		public StructDefinition()
+    public StructDefinition(string name = null)
+      : base(name)
     {
-		}
+    }
 
-		public string SpecDerivedType { get; set; }
+    public string SpecDerivedType { get; set; }
 
 		public string DerivedType { get; set; }
 
@@ -36,6 +37,12 @@ namespace SixtenLabs.Spawn.CSharp
 
 		public List<FieldDefinition> Fields { get; set; } = new List<FieldDefinition>();
 
-		public List<AttributeDefinition> Attributes { get; set; } = new List<AttributeDefinition>();
-	}
+    public List<PropertyDefinition> Properties { get; set; } = new List<PropertyDefinition>();
+
+    public List<AttributeDefinition> Attributes { get; set; } = new List<AttributeDefinition>();
+
+    public CommentDefinition Comments { get; set; } = new CommentDefinition();
+
+    public List<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
+  }
 }

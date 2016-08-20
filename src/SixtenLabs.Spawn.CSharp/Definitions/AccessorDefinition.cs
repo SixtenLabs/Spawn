@@ -5,11 +5,12 @@ namespace SixtenLabs.Spawn.CSharp
 {
 	public class AccessorDefinition : Definition
 	{
-		public AccessorDefinition()
-		{
+    public AccessorDefinition(string name = null)
+      : base(name)
+    {
     }
 
-		public void AddBlock(BlockDefinition block)
+    public void AddBlock(BlockDefinition block)
 		{
 			Block = block;
 		}

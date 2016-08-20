@@ -9,7 +9,7 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
   {
     public static EnumMemberDeclarationSyntax CreateEnumMemberDeclaration(this EnumMemberDefinition enumMemberDefition)
     {
-      var enumDeclaration = SF.EnumMemberDeclaration(enumMemberDefition.TranslatedName);
+      var enumDeclaration = SF.EnumMemberDeclaration(enumMemberDefition.Name.Code);
 
       var leadingTrivia = enumMemberDefition.Comments.GetCommentTriviaSyntax();
       var literal = SF.Literal(SF.TriviaList(), enumMemberDefition.Value, 0, SF.TriviaList());

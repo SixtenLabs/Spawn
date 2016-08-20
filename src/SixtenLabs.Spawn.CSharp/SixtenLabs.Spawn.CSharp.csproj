@@ -180,12 +180,12 @@
     <Compile Include="Definitions\AccessorDefinition.cs" />
     <Compile Include="Definitions\ArgumentDefinition.cs" />
     <Compile Include="Definitions\AttributeDefinition.cs" />
-    <Compile Include="Definitions\BaseTypeDefinition.cs" />
     <Compile Include="Definitions\BlockDefinition.cs" />
     <Compile Include="Definitions\ClassDefinition.cs" />
     <Compile Include="Definitions\CommentDefinition.cs" />
     <Compile Include="Definitions\ConstructorDefinition.cs" />
     <Compile Include="Definitions\Definition.cs" />
+    <Compile Include="Definitions\DefinitionName.cs" />
     <Compile Include="Definitions\DelegateDefinition.cs" />
     <Compile Include="Definitions\EnumDefinition.cs" />
     <Compile Include="Definitions\EnumMemberDefinition.cs" />
@@ -201,8 +201,6 @@
     <Compile Include="Definitions\RegionDefinition.cs" />
     <Compile Include="Definitions\StatementDefinition.cs" />
     <Compile Include="Definitions\StructDefinition.cs" />
-    <Compile Include="Definitions\TypeDefinition.cs" />
-    <Compile Include="Definitions\TypeMemberDefinition.cs" />
     <Compile Include="Definitions\UsingDirectiveDefinition.cs" />
     <Compile Include="Extensions\DefinitionExtensions.Accessor.cs">
       <DependentUpon>DefinitionExtensions.cs</DependentUpon>
@@ -268,6 +266,76 @@
     </Compile>
     <Compile Include="Extensions\SyntaxExtensions.Struct.cs">
       <DependentUpon>SyntaxExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.Accessor.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.Argument.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.Attribute.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.Block.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.Class.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.Comment.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.Constructor.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.cs" />
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.Delegate.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.Enum.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.EnumMember.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.Field.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.Interface.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.Literal.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.Method.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.Modifier.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.Namespace.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.Output.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.Parameter.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.Property.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.RegionDirective.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.Statement.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.Struct.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FluentDefinitions\FluentDefinitionExtensions.UsingDirective.cs">
+      <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyntaxKindDto.cs" />

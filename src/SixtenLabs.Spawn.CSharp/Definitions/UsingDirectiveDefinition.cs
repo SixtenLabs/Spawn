@@ -19,19 +19,15 @@ namespace SixtenLabs.Spawn.CSharp
 	/// </summary>
 	public class UsingDirectiveDefinition : Definition
 	{
-		/// <summary>
-		/// Use this constructor to create a standard or static using directive definition
-		/// </summary>
-		/// <param name="dllName">The name of the dll to create a using directive for</param>
-		/// <param name="isStatic">Should this be a static using directive</param>
-		public UsingDirectiveDefinition()
+    public UsingDirectiveDefinition(string name = null)
+      : base(name)
     {
-		}
+    }
 
-		/// <summary>
-		/// Is this a static using directive?
-		/// </summary>
-		public bool IsStatic { get; set; }
+    /// <summary>
+    /// Is this a static using directive?
+    /// </summary>
+    public bool IsStatic { get; set; }
 
 		/// <summary>
 		/// Is this an aliased using directive?

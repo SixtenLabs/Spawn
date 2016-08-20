@@ -13,12 +13,11 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
     {
       var modifiers = GetModifierTokens(constructorDefinition.ModifierDefinitions);
 
-      var returnTypeString = constructorDefinition.TranslatedReturnType;
       var attributes = constructorDefinition.Attributes.GetAttributeDeclarations();
       var parameters = constructorDefinition.Parameters.GetParameterDeclarations();
       var body = CreateBlock(constructorDefinition.Block);
 
-      var constructorDeclaration = SF.ConstructorDeclaration(SF.Identifier(constructorDefinition.TranslatedName))
+      var constructorDeclaration = SF.ConstructorDeclaration(SF.Identifier(constructorDefinition.Name.Code))
         .WithModifiers(modifiers);
 
       if (constructorDefinition.Attributes.Count > 0)
@@ -31,7 +30,7 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
         constructorDeclaration = constructorDeclaration.WithParameterList(parameters);
       }
 
-      if (constructorDefinition.HasBlock)
+      if (!constructorDefinition.Block.IsEmpty)
       {
         constructorDeclaration = constructorDeclaration.WithBody(body);
       }

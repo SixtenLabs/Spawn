@@ -4,11 +4,12 @@ namespace SixtenLabs.Spawn.CSharp
 {
 	public class CommentDefinition : Definition
 	{
-		public CommentDefinition()
-		{
-		}
+    public CommentDefinition(string name = null)
+      : base(name)
+    {
+    }
 
-		public bool HasComments
+    public bool HasComments
 		{
 			get
 			{

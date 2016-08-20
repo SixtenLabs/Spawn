@@ -13,10 +13,11 @@ namespace SixtenLabs.Spawn.CSharp
 	/// Delegates are similar to function pointers in C++; however, delegates are type-safe and secure. 
 	/// For applications of delegates, see Delegates and Generic Delegates.
 	/// </summary>
-	public class DelegateDefinition : TypeMemberDefinition
+	public class DelegateDefinition : Definition
 	{
-		public DelegateDefinition()
-		{
-		}
-	}
+    public DelegateDefinition(string name = null)
+      : base(name)
+    {
+    }
+  }
 }

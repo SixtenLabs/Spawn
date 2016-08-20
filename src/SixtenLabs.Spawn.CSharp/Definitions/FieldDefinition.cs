@@ -2,14 +2,14 @@
 
 namespace SixtenLabs.Spawn.CSharp
 {
-	/// <summary>
-	/// internal static ActiveShaderProgram glActiveShaderProgram;
-	/// </summary>
-	public class FieldDefinition : TypeMemberDefinition
+	public class FieldDefinition : Definition
 	{
-		public FieldDefinition()
-		{
-		}
+    public FieldDefinition(string name = null)
+      : base(name)
+    {
+    }
+
+    public DefinitionName ReturnType { get; set; } = new DefinitionName();
 
 		/// <summary>
 		/// The default value of the field. 
@@ -21,6 +21,8 @@ namespace SixtenLabs.Spawn.CSharp
 
 		public int ArraySize { get; set; }
 
-		public List<AttributeDefinition> Attributes { get; set; } = new List<AttributeDefinition>();
-	}
+		public List<AttributeDefinition> AttributeDefinitions { get; set; } = new List<AttributeDefinition>();
+
+    public List<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
+  }
 }

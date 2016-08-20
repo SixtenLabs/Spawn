@@ -18,7 +18,7 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
 
       var attributeArgList = SF.AttributeArgumentList(SF.SeparatedList(arguments));
 
-      var declaration = SF.Attribute(SF.IdentifierName(attributeDefinition.TranslatedName), attributeArgList);
+      var declaration = SF.Attribute(SF.IdentifierName(attributeDefinition.Name.Code), attributeArgList);
 
       return declaration;
     }

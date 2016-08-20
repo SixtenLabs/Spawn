@@ -21,41 +21,14 @@ namespace SixtenLabs.Spawn.CSharp
 	///   structs
 	///   
 	/// </summary>
-  public class ClassDefinition : TypeDefinition
+  public class ClassDefinition : Definition
   {
-    public ClassDefinition()
+    public ClassDefinition(string name = null)
+      : base(name)
     {
     }
 
-		public void AddField(string name, string returnType = "string", string defaultValue = null)
-		{
-      LiteralDefinition literalDefinition = null;
-
-      if(defaultValue != null)
-      {
-        literalDefinition = new LiteralDefinition() { Value = defaultValue, LiteralType = defaultValue.GetType() };
-      }
-
-			var fieldDefinition = new FieldDefinition() { SpecName = name, SpecReturnType = returnType, DefaultValue = literalDefinition };
-			Fields.Add(fieldDefinition);
-		}
-
-		public PropertyDefinition AddProperty(string name, string returnType = "string", string defaultValue = null)
-		{
-			LiteralDefinition literalDefinition = null;
-
-			if (defaultValue != null)
-			{
-				literalDefinition = new LiteralDefinition() { Value = defaultValue, LiteralType = defaultValue.GetType() };
-			}
-
-			var definition = new PropertyDefinition() { SpecName = name, SpecReturnType = returnType, DefaultValue = literalDefinition };
-			Properties.Add(definition);
-
-			return definition;
-		}
-
-		public string SpecDerivedType { get; set; }
+    public string SpecDerivedType { get; set; }
 
 		public string DerivedType { get; set; }
 
@@ -68,5 +41,9 @@ namespace SixtenLabs.Spawn.CSharp
 		public List<MethodDefinition> Methods { get; set; } = new List<MethodDefinition>();
 
 		public List<AttributeDefinition> Attributes { get; set; } = new List<AttributeDefinition>();
-	}
+
+    public List<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
+
+    public CommentDefinition Comments { get; set; } = new CommentDefinition();
+  }
 }

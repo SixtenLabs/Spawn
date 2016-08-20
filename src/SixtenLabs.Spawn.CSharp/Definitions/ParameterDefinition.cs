@@ -1,11 +1,14 @@
 ﻿namespace SixtenLabs.Spawn.CSharp
 {
-	public class ParameterDefinition : BaseTypeDefinition
+	public class ParameterDefinition : Definition
 	{
-		public ParameterDefinition()
-		{
-		}
+    public ParameterDefinition(string name = null)
+      : base(name)
+    {
+    }
 
-		public bool IsPointer { get; set; }
-	}
+    public bool IsPointer { get; set; }
+
+    public DefinitionName ParameterType { get; set; } = new DefinitionName();
+  }
 }

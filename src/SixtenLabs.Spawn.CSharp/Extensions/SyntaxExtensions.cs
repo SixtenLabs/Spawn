@@ -18,7 +18,7 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
 
     public static SyntaxTriviaList LineFeed()
     {
-      return SyntaxTriviaList.Create(SF.ElasticCarriageReturnLineFeed);
+      return SyntaxTriviaList.Create(SF.Trivia(SF.SkippedTokensTrivia()));
     }
   }
 }
