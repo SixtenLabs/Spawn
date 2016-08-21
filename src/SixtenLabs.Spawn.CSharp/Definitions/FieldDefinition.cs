@@ -24,5 +24,7 @@ namespace SixtenLabs.Spawn.CSharp
 		public List<AttributeDefinition> AttributeDefinitions { get; set; } = new List<AttributeDefinition>();
 
     public List<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
+
+    public bool LineFeed { get; set; } = true;
   }
 }

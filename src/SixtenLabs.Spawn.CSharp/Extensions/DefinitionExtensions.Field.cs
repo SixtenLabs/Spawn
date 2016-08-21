@@ -27,8 +27,9 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
 
       fieldName = fieldName.WithInitializer(initializer);
 
-      var fieldDeclaration = SF.FieldDeclaration(returnType
-        .AddVariables(fieldName))
+      var variableDeclaration = returnType.AddVariables(fieldName);
+
+      var fieldDeclaration = SF.FieldDeclaration(variableDeclaration)
         .WithModifiers(modifiers);
 
       if (fieldDefinition.AttributeDefinitions.Count > 0)

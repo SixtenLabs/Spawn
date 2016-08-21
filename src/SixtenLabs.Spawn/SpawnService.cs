@@ -51,6 +51,7 @@ namespace SixtenLabs.Spawn
 
 		/// <summary>
 		/// Create a file in the target project with generated code from the passed in contents
+    /// If the file already exists it will remove the old one and add the new version.
 		/// </summary>
 		/// <param name="targetProject"></param>
 		/// <param name="newFileName"></param>
@@ -62,18 +63,34 @@ namespace SixtenLabs.Spawn
 			var documentName = $"{newFileName}.{extension}";
 			var document = project.Documents.Where(x => x.Name == documentName && x.FilePath.Contains(folders.First())).FirstOrDefault();
 
-			Document newDocument = null;
-
 			if (document != null)
 			{
-				newDocument = document.WithText(SourceText.From(contents));
-			}
-			else
-			{
-				newDocument = project.AddDocument(newFileName, contents, folders, filePath);
+        project = project.RemoveDocument(document.Id);
 			}
 
+			var newDocument = project.AddDocument(newFileName, contents, folders, filePath);
+
 			ApplyChanges(newDocument.Project.Solution);
+    }
+
+    /// <summary>
+    /// This will remove all files in a projects folder. Generated or not.
+    /// Be wary.
+    /// </summary>
+    /// <param name="targetProject"></param>
+    /// <param name="folder"></param>
+    public void FlushFolderOfDocuments(string targetProject, string folder)
+    {
+      var project = GetProject(targetProject);
+
+      var documents  = project.Documents.Where(x =>x.FilePath.Contains(folder));
+
+      foreach (var document in documents)
+      {
+        project = project.RemoveDocument(document.Id);
+      }
+
+      ApplyChanges(project.Solution);
     }
 
 		public Workspace Workspace { get; private set; }
