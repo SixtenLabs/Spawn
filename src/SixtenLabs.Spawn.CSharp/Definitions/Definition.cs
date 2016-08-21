@@ -10,7 +10,7 @@
       Name.OriginalName = name;
     }
 
-    public DefinitionName Name { get; } = new DefinitionName();
+    public DefinitionName Name { get; set; } = new DefinitionName();
 
 		/// <summary>
 		/// Use this to capture any information your spec may need.
