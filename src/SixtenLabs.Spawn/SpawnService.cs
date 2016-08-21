@@ -55,11 +55,11 @@ namespace SixtenLabs.Spawn
 		/// <param name="targetProject"></param>
 		/// <param name="newFileName"></param>
 		/// <param name="contents"></param>
-		public void AddDocumentToProject(string targetProject, string newFileName, string contents, IEnumerable<string> folders = null, string filePath = null)
+		public void AddDocumentToProject(string targetProject, string newFileName, string extension, string contents, IEnumerable<string> folders = null, string filePath = null)
 		{
 			var project = GetProject(targetProject);
 
-			var documentName = $"{newFileName}.cs";
+			var documentName = $"{newFileName}.{extension}";
 			var document = project.Documents.Where(x => x.Name == documentName && x.FilePath.Contains(folders.First())).FirstOrDefault();
 
 			Document newDocument = null;

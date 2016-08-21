@@ -18,7 +18,7 @@ namespace SixtenLabs.Spawn
 
 		protected void AddToProject(IOutputDefinition outputDefinition, string contents)
 		{
-			Spawn.AddDocumentToProject(outputDefinition.TargetSolution, outputDefinition.FileName, contents, new[] { outputDefinition.OutputDirectory });
+			Spawn.AddDocumentToProject(outputDefinition.TargetSolution, outputDefinition.FileName, outputDefinition.Extension, contents, new[] { outputDefinition.OutputDirectory });
 		}
 
 		protected ISpawnService Spawn { get; }

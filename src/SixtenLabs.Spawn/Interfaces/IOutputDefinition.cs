@@ -12,6 +12,8 @@ namespace SixtenLabs.Spawn
 
 		string FileName { get; set; }
 
+    string Extension { get; set; }
+
 		string OutputDirectory { get; set; }
 	}
 }

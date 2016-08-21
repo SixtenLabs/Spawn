@@ -11,12 +11,14 @@ namespace SixtenLabs.Spawn.Tests
 			return new SpawnService();
 		}
 
-		[Fact]
+		[Fact(Skip="This creates files. Run manaully if testing is needed on file creation.")]
 		public void xx()
 		{
 			var subject = SubjectUnderTest();
 
-			//subject.AddDocumentToProject("test", "bobs", "", );
+      subject.Initialize(@"C:\Users\pglas\Documents\GitHub\SixtenLabs\Spawn\Spawn.sln");
+
+			subject.AddDocumentToProject("SixtenLabs.Spawn.Tests", "Api.Instance", "cs", "public class Test{  }", new[] { "Api" } );
 		}
 	}
 }

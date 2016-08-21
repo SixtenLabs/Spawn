@@ -61,6 +61,8 @@ namespace SixtenLabs.Spawn.CSharp
 
 		public string FileName { get; set; }
 
+    public string Extension { get; set; }
+
 		public IList<string> CommentLines { get; set; } = new List<string>();
 
 		public string OutputDirectory { get; set; }

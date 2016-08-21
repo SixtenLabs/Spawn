@@ -22,7 +22,7 @@ namespace SixtenLabs.Spawn
 		/// <param name="targetProject"></param>
 		/// <param name="newFileName"></param>
 		/// <param name="contents"></param>
-		void AddDocumentToProject(string targetProject, string newFileName, string contents, IEnumerable<string> folders = null, string filePath = null);
+		void AddDocumentToProject(string targetProject, string newFileName, string extension, string contents, IEnumerable<string> folders = null, string filePath = null);
 
 		Workspace Workspace { get; }
 

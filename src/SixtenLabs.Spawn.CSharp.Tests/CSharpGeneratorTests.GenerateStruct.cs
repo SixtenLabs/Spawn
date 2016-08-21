@@ -134,11 +134,32 @@ namespace SixtenLabs.Spawn.CSharp.Tests
         .AddModifier(SyntaxKindDto.ReadOnlyKeyword)
         .AddModifier(SyntaxKindDto.StaticKeyword);
 
+      var expected = $"/// <summary>{NewLine}/// Test Summary{NewLine}/// </summary>{NewLine}[StructLayout(LayoutKind.Explicit)]{NewLine}public struct WindowHandle{NewLine}{{{NewLine}    [FieldOffset(0)]{NewLine}    public IntPtr pointer;{NewLine}    public readonly static WindowHandle Null = new WindowHandle(IntPtr.Zero);{NewLine}    private WindowHandle(IntPtr @pointer){NewLine}    {{{NewLine}        this.pointer = pointer;{NewLine}    }}{NewLine}}}";
+
       var actual = subject.GenerateStruct(output, structDef);
 
-      actual.Should().Be(TestStruct);
+      actual.Should().Be(expected);
     }
 
-    private string TestStruct = $"/// <summary>{NewLine}/// Test Summary{NewLine}/// </summary>{NewLine}[StructLayout(LayoutKind.Explicit)]{NewLine}public struct WindowHandle{NewLine}{{{NewLine}    [FieldOffset(0)]{NewLine}    public IntPtr pointer;{NewLine}    public readonly static WindowHandle Null = new WindowHandle(IntPtr.Zero);{NewLine}    private WindowHandle(IntPtr @pointer){NewLine}    {{{NewLine}        this.pointer = pointer;{NewLine}    }}{NewLine}}}";
+    [Fact]
+    public void GenerateStruct_WithArrayField_IsCorrect()
+    {
+      var subject = Fixture.NewSubjectUnderTest();
+
+      var output = new OutputDefinition();
+      var structDef = new StructDefinition("DebugMarkerMarkerInfoExt");
+      structDef.AddModifier(SyntaxKindDto.PublicKeyword);
+
+      structDef.AddField("color")
+        .WithReturnType("float[4]")
+        .AddModifier(SyntaxKindDto.InternalKeyword)
+        .AddModifier(SyntaxKindDto.UnsafeKeyword)
+        .AddModifier(SyntaxKindDto.FixedKeyword);
+
+      var expected = $"public struct DebugMarkerMarkerInfoExt{NewLine}{{{NewLine}    internal unsafe fixed float[4] color;{NewLine}}}";
+      var actual = subject.GenerateStruct(output, structDef);
+
+      actual.Should().Be(expected);
+    }
   }
 }
