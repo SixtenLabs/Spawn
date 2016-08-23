@@ -27,9 +27,9 @@ namespace SixtenLabs.Spawn.CSharp.FluentDefinitions
       return definition;
     }
 
-    public static FieldDefinition WithDefaultValue(this FieldDefinition fieldDefinition, string defaultValue, SyntaxKindDto kind, params string[] arguments)
+    public static FieldDefinition WithDefaultValue(this FieldDefinition fieldDefinition, string defaultValue, Type literalType, SyntaxKindDto kind, params string[] arguments)
     {
-      var literalDefinition = new LiteralDefinition(defaultValue) { LiteralType = defaultValue.GetType() };
+      var literalDefinition = new LiteralDefinition(defaultValue) { LiteralType = literalType };
 
       literalDefinition.Kind = kind;
       fieldDefinition.DefaultValue = literalDefinition;

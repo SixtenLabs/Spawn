@@ -12,7 +12,7 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
       var fields = classDefinition.FieldDefinitions.GetFieldDeclarations();
       var methods = classDefinition.MethodDefinitions.GetMethodDeclarations();
       var properties = classDefinition.PropertyDefinitions.GetPropertyDeclarations();
-
+      
       memberList = memberList.AddRange(fields);
       memberList = memberList.AddRange(methods);
       memberList = memberList.AddRange(properties);

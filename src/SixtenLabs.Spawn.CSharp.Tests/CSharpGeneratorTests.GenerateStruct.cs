@@ -115,7 +115,7 @@ namespace SixtenLabs.Spawn.CSharp.Tests
 
       structDef.AddField("Null")
         .WithReturnType("WindowHandle")
-        .WithDefaultValue("WindowHandle", SyntaxKindDto.ObjectCreationExpression, "IntPtr.Zero")
+        .WithDefaultValue("WindowHandle", typeof(string), SyntaxKindDto.ObjectCreationExpression, "IntPtr.Zero")
         .WithModifiers(SyntaxKindDto.PublicKeyword, SyntaxKindDto.ReadOnlyKeyword, SyntaxKindDto.StaticKeyword);
 
       var expected = $"/// <summary>{NewLine}/// Test Summary{NewLine}/// </summary>{NewLine}[StructLayout(LayoutKind.Explicit)]{NewLine}public struct WindowHandle{NewLine}{{{NewLine}    [FieldOffset(0)]{NewLine}    public IntPtr pointer;{NewLine}    public readonly static WindowHandle Null = new WindowHandle(IntPtr.Zero);{NewLine}    private WindowHandle(IntPtr @pointer){NewLine}    {{{NewLine}        this.pointer = pointer;{NewLine}    }}{NewLine}}}";

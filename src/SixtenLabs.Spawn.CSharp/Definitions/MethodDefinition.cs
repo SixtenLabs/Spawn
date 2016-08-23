@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.Spawn.CSharp
 {
-	public class MethodDefinition : Definition, IHaveBlock
+	public class MethodDefinition : Definition, IHaveBlock, IHaveAttributes, IHaveModifiers, IHaveParameters
 	{
     public MethodDefinition(string name = null)
       : base(name)
@@ -13,10 +13,10 @@ namespace SixtenLabs.Spawn.CSharp
 
     public BlockDefinition BlockDefinition { get; set; } = new BlockDefinition();
 
-    public List<AttributeDefinition> Attributes { get; set; } = new List<AttributeDefinition>();
+    public IList<AttributeDefinition> AttributeDefinitions { get; set; } = new List<AttributeDefinition>();
 
-    public List<ParameterDefinition> Parameters { get; set; } = new List<ParameterDefinition>();
+    public IList<ParameterDefinition> ParameterDefinitions { get; set; } = new List<ParameterDefinition>();
 
-    public List<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
+    public IList<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
   }
 }

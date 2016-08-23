@@ -9,10 +9,10 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
   {
     public static MethodDeclarationSyntax CreateMethodDeclaration(this MethodDefinition methodDefinition)
     {
-      var attributes = methodDefinition.Attributes.GetAttributeDeclarations();
+      var attributes = methodDefinition.AttributeDefinitions.GetAttributeDeclarations();
       var modifiers = GetModifierTokens(methodDefinition.ModifierDefinitions);
       var returnType = SF.ParseTypeName(methodDefinition.ReturnType.Code);
-      var parameters = methodDefinition.Parameters.GetParameterDeclarations();
+      var parameters = methodDefinition.ParameterDefinitions.GetParameterDeclarations();
 
       var declaration = SF.MethodDeclaration(returnType, SF.Identifier(methodDefinition.Name.Code))
         .WithAttributeLists(SF.SingletonList(attributes))

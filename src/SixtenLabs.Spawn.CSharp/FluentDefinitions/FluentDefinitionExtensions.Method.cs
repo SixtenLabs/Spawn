@@ -1,20 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SixtenLabs.Spawn.CSharp.FluentDefinitions
+﻿namespace SixtenLabs.Spawn.CSharp.FluentDefinitions
 {
   /// <summary>
   /// Fluent MethodDefinition Extensions
   /// </summary>
   public static partial class FluentDefinitionExtensions
   {
-    public static MethodDefinition AddModifier(this MethodDefinition definition, SyntaxKindDto kind)
+    public static MethodDefinition AddMethod<T>(this T parentDefinition, string name) where T : IHaveMethods
     {
-      var modifierDefinition = new ModifierDefinition() { Modifier = kind };
-      definition.ModifierDefinitions.Add(modifierDefinition);
+      var methodDefinition = new MethodDefinition(name);
+      
+      parentDefinition.MethodDefinitions.Add(methodDefinition);
+
+      return methodDefinition;
+    }
+
+    public static MethodDefinition WithReturnType(this MethodDefinition definition, string returnType)
+    {
+      definition.ReturnType.OriginalName = returnType;
 
       return definition;
     }
