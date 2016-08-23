@@ -11,5 +11,14 @@ namespace SixtenLabs.Spawn.CSharp.FluentDefinitions
   /// </summary>
   public static partial class FluentDefinitionExtensions
   {
+    public static T WithAttribute<T>(this T definition, string name, params string[] arguments) where T : IHaveAttributes
+    {
+      var attributeDefinition = new AttributeDefinition(name);
+      attributeDefinition.WithArguments(arguments);
+ 
+      definition.AttributeDefinitions.Add(attributeDefinition);
+
+      return definition;
+    }
   }
 }

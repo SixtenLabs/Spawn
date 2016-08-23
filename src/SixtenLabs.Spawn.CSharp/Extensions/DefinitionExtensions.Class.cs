@@ -9,9 +9,9 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
     {
       var memberList = SF.List<MemberDeclarationSyntax>();
 
-      var fields = classDefinition.Fields.GetFieldDeclarations();
-      var methods = classDefinition.Methods.GetMethodDeclarations();
-      var properties = classDefinition.Properties.GetPropertyDeclarations();
+      var fields = classDefinition.FieldDefinitions.GetFieldDeclarations();
+      var methods = classDefinition.MethodDefinitions.GetMethodDeclarations();
+      var properties = classDefinition.PropertyDefinitions.GetPropertyDeclarations();
 
       memberList = memberList.AddRange(fields);
       memberList = memberList.AddRange(methods);

@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.Spawn.CSharp
 {
-	public class FieldDefinition : Definition
+	public class FieldDefinition : Definition, IHaveModifiers, IHaveAttributes
 	{
     public FieldDefinition(string name = null)
       : base(name)
@@ -21,9 +21,9 @@ namespace SixtenLabs.Spawn.CSharp
 
 		public int ArraySize { get; set; }
 
-		public List<AttributeDefinition> AttributeDefinitions { get; set; } = new List<AttributeDefinition>();
+		public IList<AttributeDefinition> AttributeDefinitions { get; set; } = new List<AttributeDefinition>();
 
-    public List<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
+    public IList<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
 
     public bool LineFeed { get; set; } = true;
   }

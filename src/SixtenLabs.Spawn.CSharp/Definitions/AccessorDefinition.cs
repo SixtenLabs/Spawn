@@ -1,24 +1,20 @@
 ﻿using Microsoft.CodeAnalysis.CSharp;
 using System;
+using System.Collections.Generic;
 
 namespace SixtenLabs.Spawn.CSharp
 {
-	public class AccessorDefinition : Definition
+	public class AccessorDefinition : Definition, IHaveBlock, IHaveModifiers
 	{
     public AccessorDefinition(string name = null)
       : base(name)
     {
     }
 
-    public void AddBlock(BlockDefinition block)
-		{
-			Block = block;
-		}
+    public IList<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
 
-		public SyntaxKind Modifier { get; set; }
+		public SyntaxKindDto AccessorType { get; set; }
 
-		public SyntaxKind AccessorType { get; set; }
-
-		public BlockDefinition Block { get; private set; }
+    public BlockDefinition BlockDefinition { get; private set; } = new BlockDefinition();
 	}
 }

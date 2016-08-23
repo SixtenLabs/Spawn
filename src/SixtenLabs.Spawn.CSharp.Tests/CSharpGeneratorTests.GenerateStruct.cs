@@ -42,7 +42,7 @@ namespace SixtenLabs.Spawn.CSharp.Tests
 
       var output = new OutputDefinition();
       var structDef = new StructDefinition("MyStruct");
-      structDef.Fields.Add(new FieldDefinition("FieldName"));
+      structDef.AddField("FieldName");
 
       Action act = () => subject.GenerateStruct(output, structDef);
 
@@ -56,7 +56,7 @@ namespace SixtenLabs.Spawn.CSharp.Tests
 
       var output = new OutputDefinition();
       var structDef = new StructDefinition("MyStruct");
-      structDef.Fields.Add(new FieldDefinition("FieldName").WithReturnType("void"));
+      structDef.AddField("FieldName").WithReturnType("void");
 
       var actual = subject.GenerateStruct(output, structDef);
 
@@ -83,16 +83,10 @@ namespace SixtenLabs.Spawn.CSharp.Tests
       var subject = Fixture.NewSubjectUnderTest();
 
       var output = new OutputDefinition();
-      var attribute = new AttributeDefinition("StructLayout");
-      attribute.ArgumentList.Add("LayoutKind.Explicit");
       var structDef = new StructDefinition("MyStruct");
-      structDef.Attributes.Add(attribute);
 
-      var fieldDef = new FieldDefinition("FieldName").WithReturnType("void");
-      var fieldAttribute = new AttributeDefinition("FieldOffset");
-      fieldAttribute.ArgumentList.Add("0");
-      fieldDef.AttributeDefinitions.Add(fieldAttribute);
-      structDef.Fields.Add(fieldDef);
+      structDef.WithAttribute("StructLayout", "LayoutKind.Explicit");
+      structDef.AddField("FieldName").WithReturnType("void").WithAttribute("FieldOffset", "0");
 
       var actual = subject.GenerateStruct(output, structDef);
 
@@ -106,33 +100,23 @@ namespace SixtenLabs.Spawn.CSharp.Tests
 
       var output = new OutputDefinition();
       var structDef = new StructDefinition("WindowHandle");
-      structDef.AddModifier(SyntaxKindDto.PublicKeyword);
-      var attribute = new AttributeDefinition("StructLayout");
-      attribute.ArgumentList.Add("LayoutKind.Explicit");
-      structDef.Attributes.Add(attribute);
+      structDef.WithModifier(SyntaxKindDto.PublicKeyword);
+      structDef.WithAttribute("StructLayout", "LayoutKind.Explicit");
 
-      var constructor = new ConstructorDefinition("WindowHandle");
-      constructor.AddModifier(SyntaxKindDto.PrivateKeyword);
-      constructor.AddCodeLineToBody("this.pointer = pointer;");
-      constructor.AddParameter("pointer", "IntPtr");
+      //constructor.AddCodeLineToBody("this.pointer = pointer;");
 
       structDef.Comments.CommentLines.Add("Test Summary");
-      structDef.Constructors.Add(constructor);
+      structDef.AddConstructor("WindowHandle").WithModifier(SyntaxKindDto.PrivateKeyword).WithParameter("pointer", "IntPtr").WithBlock("this.pointer = pointer;");
 
       structDef.AddField("pointer")
         .WithReturnType("IntPtr")
-        .AddModifier(SyntaxKindDto.PublicKeyword)
-        .AddAttribute("FieldOffset", "0");
-
-      var defaultValue = new LiteralDefinition("WindowHandle") { Kind = SyntaxKindDto.ObjectCreationExpression };
-      defaultValue.Arguments.Add(new ArgumentDefinition("IntPtr.Zero"));
+        .WithModifier(SyntaxKindDto.PublicKeyword)
+        .WithAttribute("FieldOffset", "0");
 
       structDef.AddField("Null")
         .WithReturnType("WindowHandle")
-        .WithDefaultValue(defaultValue)
-        .AddModifier(SyntaxKindDto.PublicKeyword)
-        .AddModifier(SyntaxKindDto.ReadOnlyKeyword)
-        .AddModifier(SyntaxKindDto.StaticKeyword);
+        .WithDefaultValue("WindowHandle", SyntaxKindDto.ObjectCreationExpression, "IntPtr.Zero")
+        .WithModifiers(SyntaxKindDto.PublicKeyword, SyntaxKindDto.ReadOnlyKeyword, SyntaxKindDto.StaticKeyword);
 
       var expected = $"/// <summary>{NewLine}/// Test Summary{NewLine}/// </summary>{NewLine}[StructLayout(LayoutKind.Explicit)]{NewLine}public struct WindowHandle{NewLine}{{{NewLine}    [FieldOffset(0)]{NewLine}    public IntPtr pointer;{NewLine}    public readonly static WindowHandle Null = new WindowHandle(IntPtr.Zero);{NewLine}    private WindowHandle(IntPtr @pointer){NewLine}    {{{NewLine}        this.pointer = pointer;{NewLine}    }}{NewLine}}}";
 
@@ -148,13 +132,12 @@ namespace SixtenLabs.Spawn.CSharp.Tests
 
       var output = new OutputDefinition();
       var structDef = new StructDefinition("DebugMarkerMarkerInfoExt");
-      structDef.AddModifier(SyntaxKindDto.PublicKeyword);
+      structDef.WithModifier(SyntaxKindDto.PublicKeyword);
 
-      structDef.AddField("color")
+      structDef
+        .AddField("color")
         .WithReturnType("float[4]")
-        .AddModifier(SyntaxKindDto.InternalKeyword)
-        .AddModifier(SyntaxKindDto.UnsafeKeyword)
-        .AddModifier(SyntaxKindDto.FixedKeyword);
+        .WithModifiers(SyntaxKindDto.InternalKeyword, SyntaxKindDto.UnsafeKeyword, SyntaxKindDto.FixedKeyword);
 
       var expected = $"public struct DebugMarkerMarkerInfoExt{NewLine}{{{NewLine}    internal unsafe fixed float[4] color;{NewLine}}}";
       var actual = subject.GenerateStruct(output, structDef);

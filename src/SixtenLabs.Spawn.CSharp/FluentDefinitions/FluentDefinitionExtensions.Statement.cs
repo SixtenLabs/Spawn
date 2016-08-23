@@ -11,5 +11,12 @@ namespace SixtenLabs.Spawn.CSharp.FluentDefinitions
   /// </summary>
   public static partial class FluentDefinitionExtensions
   {
+    public static T AddStatement<T>(this T parentDefinition, string code) where T : IHaveStatements
+    {
+      var definition = new StatementDefinition("statement") { Code = code };
+      parentDefinition.StatementDefinitions.Add(definition);
+
+      return parentDefinition;
+    }
   }
 }

@@ -2,24 +2,19 @@
 
 namespace SixtenLabs.Spawn.CSharp
 {
-	public class ConstructorDefinition : Definition
+	public class ConstructorDefinition : Definition, IHaveAttributes, IHaveModifiers, IHaveParameters, IHaveBlock
 	{
     public ConstructorDefinition(string name = null)
       : base(name)
     {
     }
 
-    public void AddCodeLineToBody(string code)
-		{
-			Block.AddStatement(code);
-		}
+    public BlockDefinition BlockDefinition { get; set; } = new BlockDefinition();
 
-    public BlockDefinition Block { get; set; } = new BlockDefinition();
+    public IList<AttributeDefinition> AttributeDefinitions { get; set; } = new List<AttributeDefinition>();
 
-    public List<AttributeDefinition> Attributes { get; set; } = new List<AttributeDefinition>();
+    public IList<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
 
-    public List<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
-
-    public List<ParameterDefinition> Parameters { get; set; } = new List<ParameterDefinition>();
+    public IList<ParameterDefinition> ParameterDefinitions { get; set; } = new List<ParameterDefinition>();
   }
 }

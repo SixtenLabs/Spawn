@@ -10,16 +10,24 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
   {
     private static AccessorDeclarationSyntax ComposeAccessor(AccessorDefinition definition)
     {
-      var declaration = SF.AccessorDeclaration(definition.AccessorType);
+      var declaration = SF.AccessorDeclaration((SyntaxKind)definition.AccessorType);
 
-      if (definition.Modifier != SyntaxKind.None)
+      var modifiers = SF.TokenList();
+
+      foreach (var modifier in definition.ModifierDefinitions)
       {
-        declaration = declaration.WithModifiers(SF.TokenList(SF.Token(definition.Modifier)));
+        var modifierToken = SF.Token((SyntaxKind)modifier.Modifier);
+        modifiers.Add(modifierToken);
       }
 
-      if (definition.Block != null)
+      if (definition.ModifierDefinitions.Count > 0)
       {
-        var block = definition.Block.CreateBlock();
+        declaration = declaration.WithModifiers(modifiers);
+      }
+
+      if (definition.BlockDefinition != null)
+      {
+        var block = definition.BlockDefinition.CreateBlock();
         declaration = declaration.WithBody(block);
       }
       else

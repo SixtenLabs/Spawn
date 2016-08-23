@@ -13,24 +13,24 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
     {
       var modifiers = GetModifierTokens(constructorDefinition.ModifierDefinitions);
 
-      var attributes = constructorDefinition.Attributes.GetAttributeDeclarations();
-      var parameters = constructorDefinition.Parameters.GetParameterDeclarations();
-      var body = CreateBlock(constructorDefinition.Block);
+      var attributes = constructorDefinition.AttributeDefinitions.GetAttributeDeclarations();
+      var parameters = constructorDefinition.ParameterDefinitions.GetParameterDeclarations();
+      var body = CreateBlock(constructorDefinition.BlockDefinition);
 
       var constructorDeclaration = SF.ConstructorDeclaration(SF.Identifier(constructorDefinition.Name.Code))
         .WithModifiers(modifiers);
 
-      if (constructorDefinition.Attributes.Count > 0)
+      if (constructorDefinition.AttributeDefinitions.Count > 0)
       {
         constructorDeclaration = constructorDeclaration.WithAttributeLists(SF.SingletonList(attributes));
       }
 
-      if (constructorDefinition.Parameters.Count > 0)
+      if (constructorDefinition.ParameterDefinitions.Count > 0)
       {
         constructorDeclaration = constructorDeclaration.WithParameterList(parameters);
       }
 
-      if (!constructorDefinition.Block.IsEmpty)
+      if (!constructorDefinition.BlockDefinition.IsEmpty)
       {
         constructorDeclaration = constructorDeclaration.WithBody(body);
       }

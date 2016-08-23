@@ -17,5 +17,13 @@ namespace SixtenLabs.Spawn.CSharp.FluentDefinitions
 
       return definition;
     }
+
+    public static T WithParameter<T>(this T definition, string name, string parameterType) where T : IHaveParameters
+    {
+      var parameterDefinition = new ParameterDefinition(name).WithParameterType(parameterType);
+      definition.ParameterDefinitions.Add(parameterDefinition);
+
+      return definition;
+    }
   }
 }

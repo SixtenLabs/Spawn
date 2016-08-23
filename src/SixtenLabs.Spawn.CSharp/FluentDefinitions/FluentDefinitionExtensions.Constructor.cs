@@ -11,20 +11,13 @@ namespace SixtenLabs.Spawn.CSharp.FluentDefinitions
   /// </summary>
   public static partial class FluentDefinitionExtensions
   {
-    public static ConstructorDefinition AddModifier(this ConstructorDefinition definition, SyntaxKindDto kind)
+    public static ConstructorDefinition AddConstructor<T>(this T definition, string name) where T : IHaveConstructors
     {
-      var modifierDefinition = new ModifierDefinition() { Modifier = kind };
-      definition.ModifierDefinitions.Add(modifierDefinition);
+      var constructorDefinition = new ConstructorDefinition(name);
 
-      return definition;
-    }
+      definition.ConstructorDefinitions.Add(constructorDefinition);
 
-    public static ConstructorDefinition AddParameter(this ConstructorDefinition definition, string name, string parameterType)
-    {
-      var parameterDefinition = new ParameterDefinition(name).WithParameterType(parameterType);
-      definition.Parameters.Add(parameterDefinition);
-
-      return definition;
+      return constructorDefinition;
     }
   }
 }

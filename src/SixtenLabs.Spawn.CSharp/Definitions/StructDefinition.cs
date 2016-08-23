@@ -20,7 +20,7 @@ namespace SixtenLabs.Spawn.CSharp
 	///   nested types
 	/// 
 	/// </summary>
-	public class StructDefinition : Definition
+	public class StructDefinition : Definition, IHaveProperties, IHaveFields, IHaveMethods, IHaveModifiers, IHaveAttributes, IHaveConstructors
 	{
     public StructDefinition(string name = null)
       : base(name)
@@ -33,16 +33,18 @@ namespace SixtenLabs.Spawn.CSharp
 
 		public bool NeedsMarshalling { get; set; }
 
-		public List<ConstructorDefinition> Constructors { get; set; } = new List<ConstructorDefinition>();
+		public IList<ConstructorDefinition> ConstructorDefinitions { get; set; } = new List<ConstructorDefinition>();
 
-		public List<FieldDefinition> Fields { get; set; } = new List<FieldDefinition>();
+		public IList<FieldDefinition> FieldDefinitions { get; set; } = new List<FieldDefinition>();
 
-    public List<PropertyDefinition> Properties { get; set; } = new List<PropertyDefinition>();
+    public IList<MethodDefinition> MethodDefinitions { get; set; } = new List<MethodDefinition>();
 
-    public List<AttributeDefinition> Attributes { get; set; } = new List<AttributeDefinition>();
+    public IList<PropertyDefinition> PropertyDefinitions { get; set; } = new List<PropertyDefinition>();
+
+    public IList<AttributeDefinition> AttributeDefinitions { get; set; } = new List<AttributeDefinition>();
 
     public CommentDefinition Comments { get; set; } = new CommentDefinition();
 
-    public List<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
+    public IList<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
   }
 }

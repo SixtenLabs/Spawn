@@ -11,14 +11,13 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
     {
       var memberList = SF.List<MemberDeclarationSyntax>();
 
-      var fields = structDefinition.Fields.GetFieldDeclarations();
-      var constructors = structDefinition.Constructors.GetConstructorDeclarations();
+      var fields = structDefinition.FieldDefinitions.GetFieldDeclarations();
+      var constructors = structDefinition.ConstructorDefinitions.GetConstructorDeclarations();
       memberList = memberList.AddRange(fields);
       memberList = memberList.AddRange(constructors);
 
       var modifierTokens = GetModifierTokens(structDefinition.ModifierDefinitions);
-      var attributes = structDefinition.Attributes.GetAttributeDeclarations();
-
+      
       if (structDefinition.Comments.HasComments)
       {
         var comments = structDefinition.Comments.GetCommentTriviaSyntax();
@@ -29,8 +28,9 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
         .WithModifiers(modifierTokens)
         .WithMembers(memberList);
 
-      if (structDefinition.Attributes.Count > 0)
+      if (structDefinition.AttributeDefinitions.Count > 0)
       {
+        var attributes = structDefinition.AttributeDefinitions.GetAttributeDeclarations();
         structDeclaration = structDeclaration.WithAttributeLists(SF.SingletonList(attributes));
       }
 

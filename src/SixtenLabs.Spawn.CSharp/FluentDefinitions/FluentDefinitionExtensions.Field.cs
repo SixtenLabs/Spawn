@@ -11,26 +11,13 @@ namespace SixtenLabs.Spawn.CSharp.FluentDefinitions
   /// </summary>
   public static partial class FluentDefinitionExtensions
   {
-    public static FieldDefinition AddModifier(this FieldDefinition definition, SyntaxKindDto kind)
+    public static FieldDefinition AddField(this IHaveFields parentDefinition, string name)
     {
-      var modifierDefinition = new ModifierDefinition() { Modifier = kind };
-      definition.ModifierDefinitions.Add(modifierDefinition);
+      var fieldDefinition = new FieldDefinition(name);
 
-      return definition;
-    }
+      parentDefinition.FieldDefinitions.Add(fieldDefinition);
 
-    public static FieldDefinition AddAttribute(this FieldDefinition definition, string name, params string[] arguments)
-    {
-      var attributeDefinition = new AttributeDefinition(name);
-
-      foreach(var argument in arguments)
-      {
-        attributeDefinition.ArgumentList.Add(argument);
-      }
-
-      definition.AttributeDefinitions.Add(attributeDefinition);
-
-      return definition;
+      return fieldDefinition;
     }
 
     public static FieldDefinition WithReturnType(this FieldDefinition definition, string returnType)
@@ -40,11 +27,20 @@ namespace SixtenLabs.Spawn.CSharp.FluentDefinitions
       return definition;
     }
 
-    public static FieldDefinition WithDefaultValue(this FieldDefinition definition, LiteralDefinition defaultValue)
+    public static FieldDefinition WithDefaultValue(this FieldDefinition fieldDefinition, string defaultValue, SyntaxKindDto kind, params string[] arguments)
     {
-      definition.DefaultValue = defaultValue;
+      var literalDefinition = new LiteralDefinition(defaultValue) { LiteralType = defaultValue.GetType() };
 
-      return definition;
+      literalDefinition.Kind = kind;
+      fieldDefinition.DefaultValue = literalDefinition;
+
+      foreach(var argument in arguments)
+      {
+        var arg = new ArgumentDefinition(argument);
+        literalDefinition.Arguments.Add(arg);
+      }
+
+      return fieldDefinition;
     }
   }
 }

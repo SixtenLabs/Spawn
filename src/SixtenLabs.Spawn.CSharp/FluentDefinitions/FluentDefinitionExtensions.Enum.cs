@@ -24,11 +24,7 @@
     public static EnumDefinition AddAttribute(this EnumDefinition definition, string name, params string[] arguments)
     {
       var attributeDefinition = new AttributeDefinition(name);
-
-      foreach (var argument in arguments)
-      {
-        attributeDefinition.ArgumentList.Add(argument);
-      }
+      attributeDefinition.WithArguments(arguments);
 
       definition.AttributeDefinitions.Add(attributeDefinition);
 

@@ -21,29 +21,29 @@ namespace SixtenLabs.Spawn.CSharp
 	///   structs
 	///   
 	/// </summary>
-  public class ClassDefinition : Definition
+  public class ClassDefinition : Definition, IHaveProperties, IHaveFields, IHaveModifiers, IHaveMethods, IHaveInterfaces, IHaveAttributes, IHaveConstructors, IHaveComments
   {
     public ClassDefinition(string name = null)
       : base(name)
     {
     }
 
-    public string SpecDerivedType { get; set; }
+		public DefinitionName DerivedType { get; set; }
 
-		public string DerivedType { get; set; }
+		public IList<ConstructorDefinition> ConstructorDefinitions { get; set; } = new List<ConstructorDefinition>();
 
-		public List<ConstructorDefinition> Constructors { get; set; } = new List<ConstructorDefinition>();
+		public IList<FieldDefinition> FieldDefinitions { get; set; } = new List<FieldDefinition>();
 
-		public IList<FieldDefinition> Fields { get; set; } = new List<FieldDefinition>();
+		public IList<PropertyDefinition> PropertyDefinitions { get; set; } = new List<PropertyDefinition>();
 
-		public IList<PropertyDefinition> Properties { get; set; } = new List<PropertyDefinition>();
+    public IList<InterfaceDefinition> InterfaceDefinitions { get; set; } = new List<InterfaceDefinition>();
 
-		public List<MethodDefinition> Methods { get; set; } = new List<MethodDefinition>();
+    public IList<MethodDefinition> MethodDefinitions { get; set; } = new List<MethodDefinition>();
 
-		public List<AttributeDefinition> Attributes { get; set; } = new List<AttributeDefinition>();
+		public IList<AttributeDefinition> AttributeDefinitions { get; set; } = new List<AttributeDefinition>();
 
-    public List<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
+    public IList<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
 
-    public CommentDefinition Comments { get; set; } = new CommentDefinition();
+    public CommentDefinition CommentDefinition { get; set; } = new CommentDefinition();
   }
 }

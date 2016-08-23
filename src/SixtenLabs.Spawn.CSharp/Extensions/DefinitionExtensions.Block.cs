@@ -18,7 +18,7 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
     {
       var statementList = new List<StatementSyntax>();
 
-      foreach (var statement in definition.Statements)
+      foreach (var statement in definition.StatementDefinitions)
       {
         var declaration = SF.ParseStatement(statement.Code);
         statementList.Add(declaration);

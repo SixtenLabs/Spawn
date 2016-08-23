@@ -6,27 +6,21 @@ using System.Threading.Tasks;
 
 namespace SixtenLabs.Spawn.CSharp
 {
-	public class BlockDefinition : Definition
-	{
+	public class BlockDefinition : Definition, IHaveStatements
+  {
     public BlockDefinition(string name = null)
       : base(name)
     {
     }
 
-    public void AddStatement(string code)
-		{
-			var definition = new StatementDefinition("statement") { Code = code };
-			Statements.Add(definition);
-		}
-
     public bool IsEmpty
     {
       get
       {
-        return Statements.Count == 0;
+        return StatementDefinitions.Count == 0;
       }
     }
 
-		public IList<StatementDefinition> Statements { get; set; } = new List<StatementDefinition>();
+		public IList<StatementDefinition> StatementDefinitions { get; set; } = new List<StatementDefinition>();
 	}
 }

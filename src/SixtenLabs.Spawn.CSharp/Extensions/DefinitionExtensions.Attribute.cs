@@ -10,9 +10,9 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
     {
       var arguments = new List<AttributeArgumentSyntax>();
 
-      foreach (var arg in attributeDefinition.ArgumentList)
+      foreach (var arg in attributeDefinition.ArgumentDefinitions)
       {
-        var argument = SF.AttributeArgument(SF.IdentifierName(arg));
+        var argument = SF.AttributeArgument(SF.IdentifierName(arg.Name.Code));
         arguments.Add(argument);
       }
 

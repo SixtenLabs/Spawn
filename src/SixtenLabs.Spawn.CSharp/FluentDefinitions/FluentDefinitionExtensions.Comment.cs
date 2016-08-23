@@ -11,5 +11,14 @@ namespace SixtenLabs.Spawn.CSharp.FluentDefinitions
   /// </summary>
   public static partial class FluentDefinitionExtensions
   {
+    public static T WithComment<T>(this T parentDefinition, params string[] commentLines) where T : IHaveComments
+    {
+      foreach (var commentLine in commentLines)
+      {
+        parentDefinition.CommentDefinition.CommentLines.Add(commentLine);
+      }
+
+      return parentDefinition;
+    }
   }
 }

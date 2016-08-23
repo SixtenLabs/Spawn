@@ -337,6 +337,19 @@
     <Compile Include="FluentDefinitions\FluentDefinitionExtensions.UsingDirective.cs">
       <DependentUpon>FluentDefinitionExtensions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IHaveAccessors.cs" />
+    <Compile Include="Interfaces\IHaveArguments.cs" />
+    <Compile Include="Interfaces\IHaveAttributes.cs" />
+    <Compile Include="Interfaces\IHaveBlock.cs" />
+    <Compile Include="Interfaces\IHaveComments.cs" />
+    <Compile Include="Interfaces\IHaveConstructors.cs" />
+    <Compile Include="Interfaces\IHaveFields.cs" />
+    <Compile Include="Interfaces\IHaveInterfaces.cs" />
+    <Compile Include="Interfaces\IHaveMethods.cs" />
+    <Compile Include="Interfaces\IHaveModifiers.cs" />
+    <Compile Include="Interfaces\IHaveParameters.cs" />
+    <Compile Include="Interfaces\IHaveProperties.cs" />
+    <Compile Include="Interfaces\IHaveStatements.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyntaxKindDto.cs" />
   </ItemGroup>

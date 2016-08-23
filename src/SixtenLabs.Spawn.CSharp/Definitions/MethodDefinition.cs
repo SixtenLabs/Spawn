@@ -2,7 +2,7 @@
 
 namespace SixtenLabs.Spawn.CSharp
 {
-	public class MethodDefinition : Definition
+	public class MethodDefinition : Definition, IHaveBlock
 	{
     public MethodDefinition(string name = null)
       : base(name)
@@ -11,12 +11,7 @@ namespace SixtenLabs.Spawn.CSharp
 
     public DefinitionName ReturnType { get; set; } = new DefinitionName();
 
-    public void AddCodeLineToBody(string code)
-		{
-			Block.AddStatement(code);
-		}
-
-    public BlockDefinition Block { get; set; } = new BlockDefinition();
+    public BlockDefinition BlockDefinition { get; set; } = new BlockDefinition();
 
     public List<AttributeDefinition> Attributes { get; set; } = new List<AttributeDefinition>();
 

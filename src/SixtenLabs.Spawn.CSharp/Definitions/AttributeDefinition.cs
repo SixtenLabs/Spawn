@@ -2,13 +2,13 @@
 
 namespace SixtenLabs.Spawn.CSharp
 {
-	public class AttributeDefinition : Definition
-	{
+	public class AttributeDefinition : Definition, IHaveArguments
+  {
     public AttributeDefinition(string name = null)
       : base(name)
     {
     }
 
-    public IList<string> ArgumentList { get; set; } = new List<string>();
+    public IList<ArgumentDefinition> ArgumentDefinitions { get; set; } = new List<ArgumentDefinition>();
 	}
 }

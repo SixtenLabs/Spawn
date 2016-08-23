@@ -10,9 +10,16 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
 
       var classDeclaration = classDefinition.CreateClassDeclaration();
 
-			nameSpaceDeclaration = nameSpaceDeclaration.AddMembers(classDeclaration);
+      if (nameSpaceDeclaration != null)
+      {
+        nameSpaceDeclaration = nameSpaceDeclaration.AddMembers(classDeclaration);
 
-			return compilationUnit.AddMembers(nameSpaceDeclaration);
+        return compilationUnit.AddMembers(nameSpaceDeclaration);
+      }
+      else
+      {
+        return compilationUnit.AddMembers(classDeclaration);
+      }
 		}
 	}
 }
