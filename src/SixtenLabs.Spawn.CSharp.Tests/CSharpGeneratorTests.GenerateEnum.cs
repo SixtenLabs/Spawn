@@ -68,7 +68,7 @@ namespace SixtenLabs.Spawn.CSharp.Tests
       var subject = Fixture.NewSubjectUnderTest();
 
       var output = new OutputDefinition();
-      var enumDef = new EnumDefinition("FancyEnum").AddModifier(SyntaxKindDto.PublicKeyword);
+      var enumDef = new EnumDefinition("FancyEnum").WithModifier(SyntaxKindDto.PublicKeyword);
 
       var actual = subject.GenerateEnum(output, enumDef);
 
@@ -81,7 +81,9 @@ namespace SixtenLabs.Spawn.CSharp.Tests
       var subject = Fixture.NewSubjectUnderTest();
 
       var output = new OutputDefinition();
-      var enumDef = new EnumDefinition("FancyEnum").AddEnumMember("None", "0");
+      var enumDef = new EnumDefinition("FancyEnum");
+
+      enumDef.AddEnumMember("None").WithValue("0");
 
       var actual = subject.GenerateEnum(output, enumDef);
 
@@ -94,9 +96,10 @@ namespace SixtenLabs.Spawn.CSharp.Tests
       var subject = Fixture.NewSubjectUnderTest();
 
       var output = new OutputDefinition();
-      var enumDef = new EnumDefinition("FancyEnum")
-        .AddEnumMember("None", "0")
-        .AddEnumMember("One", "0x01");
+      var enumDef = new EnumDefinition("FancyEnum");
+
+      enumDef.AddEnumMember("None").WithValue("0");
+      enumDef.AddEnumMember("One").WithValue("0x01");
 
       var actual = subject.GenerateEnum(output, enumDef);
 
@@ -110,15 +113,15 @@ namespace SixtenLabs.Spawn.CSharp.Tests
       var subject = Fixture.NewSubjectUnderTest();
 
       var output = new OutputDefinition();
-      var enumDef = new EnumDefinition("FancyEnum")
-        .AddEnumMember("None", "0", "Zero")
-        .AddEnumMember("One", "0x01", "One");
+      var enumDef = new EnumDefinition("FancyEnum");
+
+      enumDef.AddEnumMember("None").WithValue("0").WithComment("Zero");
+      enumDef.AddEnumMember("One").WithValue("0x01").WithComment("One");
 
       var actual = subject.GenerateEnum(output, enumDef);
 
       actual.Should().Be($"enum FancyEnum{NewLine}{{{NewLine}    /// <summary>\r\n        /// Zero\r\n        /// </summary>\r\n    None = 0,{NewLine}    /// <summary>\r\n        /// One\r\n        /// </summary>\r\n    One = 0x01{NewLine}}}");
     }
-
 
     [Fact]
     public void GenerateEnum_Attribute_OutputCorrect()
@@ -126,9 +129,11 @@ namespace SixtenLabs.Spawn.CSharp.Tests
       var subject = Fixture.NewSubjectUnderTest();
 
       var output = new OutputDefinition();
-      var enumDef = new EnumDefinition("FancyEnum")
-        .AddModifier(SyntaxKindDto.PublicKeyword)
-        .AddAttribute("Flags");
+      var enumDef = new EnumDefinition("FancyEnum");
+
+      enumDef
+        .WithModifier(SyntaxKindDto.PublicKeyword)
+        .WithFlagsAttribute();
 
       var actual = subject.GenerateEnum(output, enumDef);
 
@@ -155,7 +160,7 @@ namespace SixtenLabs.Spawn.CSharp.Tests
 
       var output = new OutputDefinition();
       var enumDef = new EnumDefinition("FancyEnum");
-      enumDef.AddModifier(SyntaxKindDto.PublicKeyword).WithComments("line 1");
+      enumDef.WithModifier(SyntaxKindDto.PublicKeyword).WithComment("line 1");
 
       var actual = subject.GenerateEnum(output, enumDef);
 

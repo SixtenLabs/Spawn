@@ -132,6 +132,7 @@ namespace SixtenLabs.Spawn.CSharp.Tests
 
       var output = new OutputDefinition();
       var structDef = new StructDefinition("DebugMarkerMarkerInfoExt");
+
       structDef.WithModifier(SyntaxKindDto.PublicKeyword);
 
       structDef

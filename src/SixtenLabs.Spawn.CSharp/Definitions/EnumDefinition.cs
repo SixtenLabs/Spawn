@@ -8,7 +8,7 @@ namespace SixtenLabs.Spawn.CSharp
 	/// The enum keyword is used to declare an enumeration, a distinct type that consists of a set of named constants called the enumerator list.
 	/// 
 	/// </summary>
-	public class EnumDefinition : Definition
+	public class EnumDefinition : Definition, IHaveAttributes, IHaveModifiers, IHaveComments
   {
     public EnumDefinition(string name = null)
       : base(name)
@@ -17,14 +17,14 @@ namespace SixtenLabs.Spawn.CSharp
 
     public IList<EnumMemberDefinition> Members { get; set; } = new List<EnumMemberDefinition>();
 
-    public List<AttributeDefinition> AttributeDefinitions { get; set; } = new List<AttributeDefinition>();
+    public IList<AttributeDefinition> AttributeDefinitions { get; set; } = new List<AttributeDefinition>();
 
-    public List<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
+    public IList<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
 
     public bool HasFlags { get; set; }
 
     public SyntaxKindDto BaseType { get; set; }
 
-    public CommentDefinition Comments { get; set; } = new CommentDefinition();
+    public CommentDefinition CommentDefinition { get; set; } = new CommentDefinition();
   }
 }

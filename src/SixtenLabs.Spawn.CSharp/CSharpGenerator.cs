@@ -76,9 +76,9 @@ namespace SixtenLabs.Spawn.CSharp
 				.WithEndOfFileToken(SF.Token(SyntaxKind.EndOfFileToken))
 				.NormalizeWhitespace();
 
-      if(enumDefinition.Comments.HasComments)
+      if(enumDefinition.CommentDefinition.HasComments)
       {
-        code = code.WithLeadingTrivia(enumDefinition.Comments.GetCommentTriviaSyntax());
+        code = code.WithLeadingTrivia(enumDefinition.CommentDefinition.GetCommentTriviaSyntax());
       }
 
 			var contents = code.GetFormattedCode();

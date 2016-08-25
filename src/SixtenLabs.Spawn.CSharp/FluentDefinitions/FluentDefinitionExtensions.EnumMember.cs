@@ -11,24 +11,17 @@ namespace SixtenLabs.Spawn.CSharp.FluentDefinitions
   /// </summary>
   public static partial class FluentDefinitionExtensions
   {
+    public static EnumMemberDefinition AddEnumMember(this EnumDefinition parentDefinition, string name)
+    {
+      var member = new EnumMemberDefinition(name);
+      parentDefinition.Members.Add(member);
+
+      return member;
+    }
+
     public static EnumMemberDefinition WithValue(this EnumMemberDefinition definition, string value)
     {
       definition.Value = value;
-
-      return definition;
-    }
-
-    /// <summary>
-    /// Add AttributeDefintion to mark this as a Flags enum.
-    /// </summary>
-    /// <param name="definition"></param>
-    /// <returns></returns>
-    public static EnumMemberDefinition WithComments(this EnumMemberDefinition definition, params string[] comments)
-    {
-      foreach (var comment in comments)
-      {
-        definition.Comments.CommentLines.Add(comment);
-      }
 
       return definition;
     }
