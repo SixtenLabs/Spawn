@@ -20,7 +20,7 @@ namespace SixtenLabs.Spawn.CSharp
 	///   nested types
 	/// 
 	/// </summary>
-	public class StructDefinition : Definition, IHaveProperties, IHaveFields, IHaveMethods, IHaveModifiers, IHaveAttributes, IHaveConstructors
+	public class StructDefinition : Definition, IHaveProperties, IHaveFields, IHaveMethods, IHaveModifiers, IHaveAttributes, IHaveConstructors, IHaveComments
 	{
     public StructDefinition(string name = null)
       : base(name)
@@ -41,10 +41,10 @@ namespace SixtenLabs.Spawn.CSharp
 
     public IList<PropertyDefinition> PropertyDefinitions { get; set; } = new List<PropertyDefinition>();
 
-    public IList<AttributeDefinition> AttributeDefinitions { get; set; } = new List<AttributeDefinition>();
-
-    public CommentDefinition Comments { get; set; } = new CommentDefinition();
+    public AttributeCollection AttributeDefinitions { get; set; } = new AttributeCollection();
 
     public IList<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
+
+    public DocumentationCommentDefinition DocumentationCommentDefinition { get; set; } = new DocumentationCommentDefinition();
   }
 }

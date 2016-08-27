@@ -23,13 +23,14 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
       return declaration;
     }
 
-    public static AttributeListSyntax GetAttributeDeclarations(this IList<AttributeDefinition> definitions)
+    public static AttributeListSyntax GetAttributeDeclarations(this AttributeCollection definitions)
     {
       var list = new List<AttributeSyntax>();
 
       foreach (var attribute in definitions)
       {
         var attributeSyntax = CreateAttributeDeclaration(attribute);
+
         list.Add(attributeSyntax);
       }
 

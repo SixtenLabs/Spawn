@@ -13,7 +13,7 @@ namespace SixtenLabs.Spawn.CSharp
 
     public BlockDefinition BlockDefinition { get; set; } = new BlockDefinition();
 
-    public IList<AttributeDefinition> AttributeDefinitions { get; set; } = new List<AttributeDefinition>();
+    public AttributeCollection AttributeDefinitions { get; set; } = new AttributeCollection();
 
     public IList<ParameterDefinition> ParameterDefinitions { get; set; } = new List<ParameterDefinition>();
 

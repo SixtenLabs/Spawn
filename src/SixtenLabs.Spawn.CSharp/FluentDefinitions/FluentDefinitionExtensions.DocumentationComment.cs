@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SixtenLabs.Spawn.CSharp.FluentDefinitions
 {
   /// <summary>
-  /// Fluent CommentDefinition Extensions
+  /// Fluent DocumentationCommentDefinition Extensions
   /// </summary>
   public static partial class FluentDefinitionExtensions
   {
@@ -15,7 +15,8 @@ namespace SixtenLabs.Spawn.CSharp.FluentDefinitions
     {
       foreach (var commentLine in commentLines)
       {
-        parentDefinition.CommentDefinition.CommentLines.Add(commentLine);
+        var commentDefinition = new CommentDefinition();
+        parentDefinition.DocumentationCommentDefinition.CommentDefinitions.Add(commentDefinition);
       }
 
       return parentDefinition;

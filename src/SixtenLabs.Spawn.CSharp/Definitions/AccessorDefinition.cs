@@ -15,6 +15,6 @@ namespace SixtenLabs.Spawn.CSharp
 
 		public SyntaxKindDto AccessorType { get; set; }
 
-    public BlockDefinition BlockDefinition { get; private set; } = new BlockDefinition();
+    public BlockDefinition BlockDefinition { get; set; } = new BlockDefinition();
 	}
 }

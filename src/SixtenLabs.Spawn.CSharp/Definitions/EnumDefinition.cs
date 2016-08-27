@@ -17,7 +17,7 @@ namespace SixtenLabs.Spawn.CSharp
 
     public IList<EnumMemberDefinition> Members { get; set; } = new List<EnumMemberDefinition>();
 
-    public IList<AttributeDefinition> AttributeDefinitions { get; set; } = new List<AttributeDefinition>();
+    public AttributeCollection AttributeDefinitions { get; set; } = new AttributeCollection();
 
     public IList<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
 
@@ -25,6 +25,6 @@ namespace SixtenLabs.Spawn.CSharp
 
     public SyntaxKindDto BaseType { get; set; }
 
-    public CommentDefinition CommentDefinition { get; set; } = new CommentDefinition();
+    public DocumentationCommentDefinition DocumentationCommentDefinition { get; set; } = new DocumentationCommentDefinition();
   }
 }

@@ -94,38 +94,6 @@ namespace SixtenLabs.Spawn.CSharp.Tests
     }
 
     [Fact]
-    public void GenerateStruct_Constructor_IsCorrect()
-    {
-      var subject = Fixture.NewSubjectUnderTest();
-
-      var output = new OutputDefinition();
-      var structDef = new StructDefinition("WindowHandle");
-      structDef.WithModifier(SyntaxKindDto.PublicKeyword);
-      structDef.WithAttribute("StructLayout", "LayoutKind.Explicit");
-
-      //constructor.AddCodeLineToBody("this.pointer = pointer;");
-
-      structDef.Comments.CommentLines.Add("Test Summary");
-      structDef.AddConstructor("WindowHandle").WithModifier(SyntaxKindDto.PrivateKeyword).WithParameter("pointer", "IntPtr").WithBlock("this.pointer = pointer;");
-
-      structDef.AddField("pointer")
-        .WithReturnType("IntPtr")
-        .WithModifier(SyntaxKindDto.PublicKeyword)
-        .WithAttribute("FieldOffset", "0");
-
-      structDef.AddField("Null")
-        .WithReturnType("WindowHandle")
-        .WithDefaultValue("WindowHandle", typeof(string), SyntaxKindDto.ObjectCreationExpression, "IntPtr.Zero")
-        .WithModifiers(SyntaxKindDto.PublicKeyword, SyntaxKindDto.ReadOnlyKeyword, SyntaxKindDto.StaticKeyword);
-
-      var expected = $"/// <summary>{NewLine}/// Test Summary{NewLine}/// </summary>{NewLine}[StructLayout(LayoutKind.Explicit)]{NewLine}public struct WindowHandle{NewLine}{{{NewLine}    [FieldOffset(0)]{NewLine}    public IntPtr pointer;{NewLine}    public readonly static WindowHandle Null = new WindowHandle(IntPtr.Zero);{NewLine}    private WindowHandle(IntPtr @pointer){NewLine}    {{{NewLine}        this.pointer = pointer;{NewLine}    }}{NewLine}}}";
-
-      var actual = subject.GenerateStruct(output, structDef);
-
-      actual.Should().Be(expected);
-    }
-
-    [Fact]
     public void GenerateStruct_WithArrayField_IsCorrect()
     {
       var subject = Fixture.NewSubjectUnderTest();
@@ -141,6 +109,53 @@ namespace SixtenLabs.Spawn.CSharp.Tests
         .WithModifiers(SyntaxKindDto.InternalKeyword, SyntaxKindDto.UnsafeKeyword, SyntaxKindDto.FixedKeyword);
 
       var expected = $"public struct DebugMarkerMarkerInfoExt{NewLine}{{{NewLine}    internal unsafe fixed float[4] color;{NewLine}}}";
+      var actual = subject.GenerateStruct(output, structDef);
+
+      actual.Should().Be(expected);
+    }
+
+    [Fact]
+    public void GenerateStruct_WithMethod_IsCorrect()
+    {
+      var subject = Fixture.NewSubjectUnderTest();
+       
+      var output = new OutputDefinition();
+
+      output.AddStandardUsingDirective("System");
+      output.AddStandardUsingDirective("System.Runtime.InteropServices");
+      output.AddNamespace("SixtenLabs.Interop.Glfw");
+
+      var structDef = new StructDefinition("CursorHandle");
+
+      structDef
+        .WithModifier(SyntaxKindDto.PublicKeyword)
+        .WithAttribute("StructLayout", "LayoutKind.Explicit")
+        .WithComment("Opaque cursor object.", "", "typedef struct GLFWcursor GLFWcursor;", "", "Added in version 3.1.");
+
+      structDef.AddConstructor("CursorHandle")
+        .WithModifier(SyntaxKindDto.PrivateKeyword)
+        .WithParameter("innerPointer", "IntPtr")
+        .AddBlock("body")
+        .WithStatement("this.innerPointer = innerPointer;");
+
+      structDef.AddMethod("TestMethod")
+          .WithModifier(SyntaxKindDto.PublicKeyword)
+          .WithReturnType("string")
+          .WithParameter("test", "string")
+          .AddBlock("body").WithStatement(@"var x = ""test"";").WithStatement("return x;");
+
+      structDef.AddField("innerPointer")
+        .WithReturnType("IntPtr")
+        .WithModifier(SyntaxKindDto.PublicKeyword)
+        .WithAttribute("FieldOffset", "0");
+
+      structDef.AddField("Null")
+        .WithReturnType("CursorHandle")
+        .WithDefaultValue("CursorHandle", typeof(string), SyntaxKindDto.ObjectCreationExpression, "IntPtr.Zero")
+        .WithModifiers(SyntaxKindDto.PublicKeyword, SyntaxKindDto.ReadOnlyKeyword, SyntaxKindDto.StaticKeyword);
+
+      var expected = Fixture.ReadClassFromFile("CursorHandle.txt", "TestFiles");
+
       var actual = subject.GenerateStruct(output, structDef);
 
       actual.Should().Be(expected);

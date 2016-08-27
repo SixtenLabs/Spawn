@@ -115,12 +115,12 @@ namespace SixtenLabs.Spawn.CSharp.Tests
       var output = new OutputDefinition();
       var enumDef = new EnumDefinition("FancyEnum");
 
-      enumDef.AddEnumMember("None").WithValue("0").WithComment("Zero");
-      enumDef.AddEnumMember("One").WithValue("0x01").WithComment("One");
+      enumDef.AddEnumMember("None").WithValue("0");
+      enumDef.AddEnumMember("One").WithValue("0x01");
 
       var actual = subject.GenerateEnum(output, enumDef);
 
-      actual.Should().Be($"enum FancyEnum{NewLine}{{{NewLine}    /// <summary>\r\n        /// Zero\r\n        /// </summary>\r\n    None = 0,{NewLine}    /// <summary>\r\n        /// One\r\n        /// </summary>\r\n    One = 0x01{NewLine}}}");
+      actual.Should().Be($"enum FancyEnum{NewLine}{{{NewLine}    None = 0,{NewLine}    One = 0x01{NewLine}}}");
     }
 
     [Fact]
@@ -160,11 +160,11 @@ namespace SixtenLabs.Spawn.CSharp.Tests
 
       var output = new OutputDefinition();
       var enumDef = new EnumDefinition("FancyEnum");
-      enumDef.WithModifier(SyntaxKindDto.PublicKeyword).WithComment("line 1");
+      enumDef.WithModifier(SyntaxKindDto.PublicKeyword);
 
       var actual = subject.GenerateEnum(output, enumDef);
 
-      actual.Should().Be($"/// <summary>{NewLine}/// line 1{NewLine}/// </summary>{NewLine}public enum FancyEnum{NewLine}{{{NewLine}}}");
+      actual.Should().Be($"public enum FancyEnum{NewLine}{{{NewLine}}}");
     }
   }
 }

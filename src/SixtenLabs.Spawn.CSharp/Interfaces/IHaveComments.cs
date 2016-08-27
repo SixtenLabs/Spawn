@@ -2,6 +2,6 @@
 {
   public interface IHaveComments
   {
-    CommentDefinition CommentDefinition { get; }
+    DocumentationCommentDefinition DocumentationCommentDefinition { get; }
   }
 }

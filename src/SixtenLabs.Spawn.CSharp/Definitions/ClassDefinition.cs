@@ -40,10 +40,10 @@ namespace SixtenLabs.Spawn.CSharp
 
     public IList<MethodDefinition> MethodDefinitions { get; set; } = new List<MethodDefinition>();
 
-		public IList<AttributeDefinition> AttributeDefinitions { get; set; } = new List<AttributeDefinition>();
+		public AttributeCollection AttributeDefinitions { get; set; } = new AttributeCollection();
 
     public IList<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
 
-    public CommentDefinition CommentDefinition { get; set; } = new CommentDefinition();
+    public DocumentationCommentDefinition DocumentationCommentDefinition { get; set; } = new DocumentationCommentDefinition();
   }
 }

@@ -41,9 +41,9 @@ namespace SixtenLabs.Spawn.CSharp.Tests
       var subject = Fixture.NewSubjectUnderTest();
 
       var output = new OutputDefinition();
-      var classDef = new ClassDefinition("MyClass").WithModifier(SyntaxKindDto.PublicKeyword).WithComment("Test Summary");
+      var classDef = new ClassDefinition("MyClass").WithModifier(SyntaxKindDto.PublicKeyword);
 
-      var expected = $"/// <summary>{NewLine}/// Test Summary{NewLine}/// </summary>{NewLine}public class MyClass{NewLine}{{{NewLine}}}";
+      var expected = $"public class MyClass{NewLine}{{{NewLine}}}";
 
       var actual = subject.GenerateClass(output, classDef);
 

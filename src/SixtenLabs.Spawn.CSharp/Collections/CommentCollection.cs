@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SixtenLabs.Spawn.CSharp
 {
-  public interface IHaveBlock
+  public class CommentCollection : DefinitionCollection<CommentDefinition>
   {
-    BlockDefinition BlockDefinition { get; set; }
+
   }
 }

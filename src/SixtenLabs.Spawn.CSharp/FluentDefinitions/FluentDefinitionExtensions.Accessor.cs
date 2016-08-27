@@ -5,13 +5,13 @@
   /// </summary>
   public static partial class FluentDefinitionExtensions
   {
-    public static AccessorDefinition AddAccessor<T>(this T parentDefinition, string name, SyntaxKindDto type, SyntaxKindDto modifier = SyntaxKindDto.None, string block = null) where T : IHaveAccessors
+    public static AccessorDefinition AddAccessor<T>(this T parentDefinition, string name, SyntaxKindDto type, SyntaxKindDto modifier = SyntaxKindDto.None, string statement = null) where T : IHaveAccessors
     {
       var accessor = new AccessorDefinition(name);
 
-      if (!string.IsNullOrEmpty(block))
+      if (!string.IsNullOrEmpty(statement))
       {
-        accessor.WithBlock(name, block);
+        accessor.AddBlock(name).WithStatement(statement);
       }
 
       return accessor;

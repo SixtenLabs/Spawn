@@ -1,0 +1,17 @@
+﻿using System;
+using System.Runtime.InteropServices;
+
+namespace SixtenLabs.Interop.Glfw
+{
+    [StructLayout(LayoutKind.Explicit)]
+    public struct CursorHandle
+    {
+        [FieldOffset(0)]
+        public IntPtr innerPointer;
+        public readonly static CursorHandle Null = new CursorHandle(IntPtr.Zero);
+        private CursorHandle(IntPtr innerPointer)
+        {
+            this.innerPointer = innerPointer;
+        }
+    }
+}

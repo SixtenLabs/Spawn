@@ -19,9 +19,9 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
       return newLineToken;
     }
 
-    private static SyntaxToken CreateSyntaxTokenDocumentationCommentExterior(string comment)
+    private static SyntaxToken CreateSyntaxTokenDocumentationCommentExterior(this CommentDefinition comment)
     {
-      var commentToken = SF.XmlTextLiteral(SF.TriviaList(SF.DocumentationCommentExterior("///")), $" {comment}", $" {comment}", SF.TriviaList());
+      var commentToken = SF.XmlTextLiteral($"/// {comment.Comment}");
 
       return commentToken;
     }
@@ -40,18 +40,26 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
       return endTag;
     }
 
-    private static SyntaxTokenList GetCommentTokens(IList<string> comments)
+    private static SyntaxTokenList GetCommentTokens(this CommentCollection comments)
     {
       List<SyntaxToken> syntaxTokens = new List<SyntaxToken>();
+
+      int count = 0;
 
       foreach (var comment in comments)
       {
         syntaxTokens.Add(CreateSyntaxTokenXmlNewLine());
-        syntaxTokens.Add(CreateSyntaxTokenDocumentationCommentExterior(comment));
-        syntaxTokens.Add(CreateSyntaxTokenXmlNewLine());
+        syntaxTokens.Add(comment.CreateSyntaxTokenDocumentationCommentExterior());
+
+        count++;
+
+        if(count == comments.Count)
+        {
+          syntaxTokens.Add(CreateSyntaxTokenXmlNewLine());
+        }
       }
 
-      syntaxTokens.Add(CreateSyntaxTokenDocumentationCommentExterior(""));
+      syntaxTokens.Add(new CommentDefinition().CreateSyntaxTokenDocumentationCommentExterior());
 
       return SF.TokenList(syntaxTokens);
     }
@@ -61,23 +69,23 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
     /// </summary>
     /// <param name="comments"></param>
     /// <returns></returns>
-    public static SyntaxTriviaList GetCommentTriviaSyntax(this CommentDefinition commentDefinition)
+    public static SyntaxTriviaList GetCommentTriviaSyntax(this CommentCollection commentDefinitions)
     {
       SyntaxTriviaList triviaList = SF.TriviaList();
 
-      if (commentDefinition.HasComments)
+      if (commentDefinitions.IsNotEmpty)
       {
 
         var commentTrivia = SF.DocumentationCommentTrivia(SyntaxKind.SingleLineDocumentationCommentTrivia,
               SF.List(new XmlNodeSyntax[]
               {
                 SF.XmlText()
-                  .WithTextTokens(SF.TokenList(CreateSyntaxTokenDocumentationCommentExterior(""))),
+                  .WithTextTokens(SF.TokenList(new CommentDefinition().CreateSyntaxTokenDocumentationCommentExterior())),
                 SF.XmlElement(
                   CreateXmlElementStartTag("summary"),
                   CreateXmlElementEndTag("summary"))
                   .WithContent(SF.SingletonList<XmlNodeSyntax>(SF.XmlText()
-                  .WithTextTokens(GetCommentTokens(commentDefinition.CommentLines)))),
+                  .WithTextTokens(commentDefinitions.GetCommentTokens()))),
                 SF.XmlText()
                   .WithTextTokens(SF.TokenList(CreateSyntaxTokenXmlNewLine()))
               }));
@@ -86,6 +94,15 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
       }
 
       return triviaList;
+    }
+
+    public static DocumentationCommentTriviaSyntax DocumentationCommentSyntax(this DocumentationCommentDefinition definition)
+    {
+
+
+      var syntax = SF.DocumentationComment();
+
+      return syntax;
     }
   }
 }

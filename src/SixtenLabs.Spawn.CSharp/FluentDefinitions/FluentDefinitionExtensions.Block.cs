@@ -5,14 +5,12 @@
   /// </summary>
   public static partial class FluentDefinitionExtensions
   {
-    public static T WithBlock<T>(this T parentDefinition, params string[] codeLines) where T : IHaveBlock
+    public static BlockDefinition AddBlock<T>(this T parentDefinition, string name) where T : IHaveBlock
     {
-      foreach(var codeLine in codeLines)
-      {
-        parentDefinition.BlockDefinition.AddStatement(codeLine);
-      }
+      var blockDefinition = new BlockDefinition(name);
+      parentDefinition.BlockDefinition = blockDefinition;
 
-      return parentDefinition;
+      return blockDefinition;
     }
   }
 }

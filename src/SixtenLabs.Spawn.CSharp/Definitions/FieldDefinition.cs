@@ -21,7 +21,7 @@ namespace SixtenLabs.Spawn.CSharp
 
 		public int ArraySize { get; set; }
 
-		public IList<AttributeDefinition> AttributeDefinitions { get; set; } = new List<AttributeDefinition>();
+		public AttributeCollection AttributeDefinitions { get; set; } = new AttributeCollection();
 
     public IList<ModifierDefinition> ModifierDefinitions { get; set; } = new List<ModifierDefinition>();
 

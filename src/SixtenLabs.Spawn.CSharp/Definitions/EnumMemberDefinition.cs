@@ -9,6 +9,6 @@
 
     public string Value { get; set; }
 
-		public CommentDefinition CommentDefinition { get; set; } = new CommentDefinition();
-	}
+    public DocumentationCommentDefinition DocumentationCommentDefinition { get; set; } = new DocumentationCommentDefinition();
+  }
 }

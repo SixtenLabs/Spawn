@@ -23,13 +23,14 @@ namespace SixtenLabs.Spawn.CSharp
 			var code = SF.CompilationUnit()
 				.AddUsingDirectives(outputDefinition.Usings)
 				.AddClass(outputDefinition, classDefinition)
+        //.WithLeadingTrivia(classDefinition.CommentDefinition.GetCommentTriviaSyntax())
 				.WithEndOfFileToken(SF.Token(SyntaxKind.EndOfFileToken))
 				.NormalizeWhitespace();
 
-      if (classDefinition.CommentDefinition.HasComments)
-      {
-        code = code.WithLeadingTrivia(classDefinition.CommentDefinition.GetCommentTriviaSyntax());
-      }
+      //if (classDefinition.CommentDefinition.HasComments)
+      //{
+      //  code = code.WithLeadingTrivia(classDefinition.CommentDefinition.GetCommentTriviaSyntax());
+      //}
 
       var contents = code.GetFormattedCode();
 			AddToProject(outputDefinition, contents);
@@ -48,13 +49,14 @@ namespace SixtenLabs.Spawn.CSharp
 			var code = SF.CompilationUnit()
 				.AddUsingDirectives(outputDefinition.Usings)
 				.AddStruct(outputDefinition, structDefinition)
-				.WithEndOfFileToken(SF.Token(SyntaxKind.EndOfFileToken))
+        //.WithLeadingTrivia(structDefinition.CommentDefinition.GetCommentTriviaSyntax())
+        .WithEndOfFileToken(SF.Token(SyntaxKind.EndOfFileToken))
 				.NormalizeWhitespace(indentation: "    ");
 
-      if (structDefinition.Comments.HasComments)
-      {
-        code = code.WithLeadingTrivia(structDefinition.Comments.GetCommentTriviaSyntax());
-      }
+      //if (structDefinition.Comments.HasComments)
+      //{
+      //  code = code.WithLeadingTrivia(structDefinition.Comments.GetCommentTriviaSyntax());
+      //}
 
       var contents = code.GetFormattedCode();
 			AddToProject(outputDefinition, contents);
@@ -76,9 +78,9 @@ namespace SixtenLabs.Spawn.CSharp
 				.WithEndOfFileToken(SF.Token(SyntaxKind.EndOfFileToken))
 				.NormalizeWhitespace();
 
-      if(enumDefinition.CommentDefinition.HasComments)
+      if(enumDefinition.DocumentationCommentDefinition.CommentDefinitions.IsNotEmpty)
       {
-        code = code.WithLeadingTrivia(enumDefinition.CommentDefinition.GetCommentTriviaSyntax());
+        code = code.WithLeadingTrivia(enumDefinition.DocumentationCommentDefinition.CommentDefinitions.GetCommentTriviaSyntax());
       }
 
 			var contents = code.GetFormattedCode();

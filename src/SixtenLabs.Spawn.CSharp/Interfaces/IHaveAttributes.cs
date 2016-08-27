@@ -8,6 +8,6 @@ namespace SixtenLabs.Spawn.CSharp
 {
   public interface IHaveAttributes
   {
-    IList<AttributeDefinition> AttributeDefinitions { get; }
+    AttributeCollection AttributeDefinitions { get; }
   }
 }

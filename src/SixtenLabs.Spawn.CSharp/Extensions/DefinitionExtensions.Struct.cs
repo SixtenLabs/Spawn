@@ -18,21 +18,35 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
 
       var modifierTokens = GetModifierTokens(structDefinition.ModifierDefinitions);
       
-      if (structDefinition.Comments.HasComments)
+      if (structDefinition.DocumentationCommentDefinition.CommentDefinitions.IsNotEmpty && structDefinition.AttributeDefinitions.IsEmpty)
       {
-        var comments = structDefinition.Comments.GetCommentTriviaSyntax();
-        modifierTokens.Insert(0, SF.Token(comments, SyntaxKind.XmlTextLiteralToken, SF.TriviaList()));
+        var comments = structDefinition.DocumentationCommentDefinition.CommentDefinitions.GetCommentTriviaSyntax();
+        modifierTokens = modifierTokens.Insert(0, SF.Token(comments, SyntaxKind.XmlTextLiteralToken, SF.TriviaList()));
       }
 
       var structDeclaration = SF.StructDeclaration(structDefinition.Name.Code)
         .WithModifiers(modifierTokens)
         .WithMembers(memberList);
 
-      if (structDefinition.AttributeDefinitions.Count > 0)
+      if (structDefinition.AttributeDefinitions.IsNotEmpty)
       {
         var attributes = structDefinition.AttributeDefinitions.GetAttributeDeclarations();
-        structDeclaration = structDeclaration.WithAttributeLists(SF.SingletonList(attributes));
+
+        // How in the hell do I get the comments in the right place?
+
+        var attributesList = SF.SingletonList(attributes);
+
+        //if (structDefinition.CommentDefinitions.IsNotEmpty)
+        //{
+        //  var comments = structDefinition.CommentDefinitions.GetCommentTriviaSyntax();
+        //  attributesList = attributesList.Insert(0, comments);
+
+        //}
+
+        structDeclaration = structDeclaration.WithAttributeLists(attributesList);
       }
+
+      
 
       return structDeclaration;
     }

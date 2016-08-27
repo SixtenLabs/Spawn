@@ -4,6 +4,7 @@ using NSubstitute;
 
 using System;
 using Microsoft.CodeAnalysis.MSBuild;
+using System.IO;
 
 namespace SixtenLabs.Spawn.CSharp.Tests
 {
@@ -23,5 +24,12 @@ namespace SixtenLabs.Spawn.CSharp.Tests
     }
 
     private ISpawnService MockSpawnService { get; set; }
+
+    public string ReadClassFromFile(string name, string path)
+    {
+      var filePath = Path.Combine(path, name);
+
+      return File.ReadAllText(filePath);
+    }
   }
 }

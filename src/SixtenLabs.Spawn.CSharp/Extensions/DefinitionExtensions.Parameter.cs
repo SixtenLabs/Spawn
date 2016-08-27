@@ -10,7 +10,8 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
     {
       var typeName = SF.IdentifierName(definition.ParameterType.Code);
 
-      var token = SF.VerbatimIdentifier(SF.TriviaList(), definition.Name.Code, "test", SF.TriviaList());
+      //var token = SF.VerbatimIdentifier(SF.TriviaList(), definition.Name.Code, "test", SF.TriviaList());
+      var token = SF.Identifier(definition.Name.Code);
 
       TypeSyntax typeSyntax = null;
 
