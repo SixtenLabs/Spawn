@@ -9,18 +9,31 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
   {
     public static MethodDeclarationSyntax CreateMethodDeclaration(this MethodDefinition methodDefinition)
     {
-      var attributes = methodDefinition.AttributeDefinitions.GetAttributeDeclarations();
       var modifiers = GetModifierTokens(methodDefinition.ModifierDefinitions);
       var returnType = SF.ParseTypeName(methodDefinition.ReturnType.Code);
       var parameters = methodDefinition.ParameterDefinitions.GetParameterDeclarations();
-      var body = methodDefinition.BlockDefinition.CreateBlock();
+      
 
       var declaration = SF.MethodDeclaration(returnType, SF.Identifier(methodDefinition.Name.Code))
-        .WithAttributeLists(SF.SingletonList(attributes))
         .WithModifiers(modifiers)
-        .WithParameterList(parameters)
-        .WithBody(body)
-        .WithSemicolonToken(SF.Token(SyntaxKind.SemicolonToken));
+        .WithParameterList(parameters);
+
+      if(methodDefinition.BlockDefinition.IsEmpty)
+      {
+        declaration = declaration.WithSemicolonToken(SF.Token(SyntaxKind.SemicolonToken));
+      }
+      else
+      {
+        var body = methodDefinition.BlockDefinition.CreateBlock();
+        declaration = declaration.WithBody(body);
+      }
+
+      if(methodDefinition.AttributeDefinitions.IsNotEmpty)
+      {
+        var attributes = methodDefinition.AttributeDefinitions.GetAttributeDeclarations();
+
+        declaration = declaration.WithAttributeLists(SF.SingletonList(attributes));
+      }
 
       return declaration;
     }

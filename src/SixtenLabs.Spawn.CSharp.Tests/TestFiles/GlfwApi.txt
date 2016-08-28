@@ -1,0 +1,32 @@
+﻿using System;
+
+namespace SixtenLabs.Interop.Glfw
+{
+    public partial class GlfwApi
+    {
+        public void MakeContextCurrent(WindowHandle window)
+        {
+            Delegates.glfwMakeContextCurrent(window);
+        }
+
+        public WindowHandle GetCurrentContext()
+        {
+            return Delegates.glfwGetCurrentContext();
+        }
+
+        public void SwapInterval(int interval)
+        {
+            Delegates.glfwSwapInterval(interval);
+        }
+
+        public bool ExtensionSupported(string extension)
+        {
+            return Delegates.glfwExtensionSupported(extension) == 1;
+        }
+
+        public IntPtr GetProcAddress(string procname)
+        {
+            return Delegates.glfwGetProcAddress(procname);
+        }
+    }
+}
