@@ -9,5 +9,7 @@ namespace SixtenLabs.Spawn
 		void CreateSpecTree(IMapper mapper);
 
 		T SpecTree { get; }
-	}
+
+    ISpecMapper SpecMapper { get; }
+  }
 }
