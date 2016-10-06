@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SixtenLabs.Spawn.Tests
 {
-  public class TestSpecMapper : SpecMapper
+  public class TestSpecMapper : SpecMapper<TestRegistry>
   {
     public TestSpecMapper(IMapper typeMapper)
       : base(typeMapper)
@@ -15,7 +15,7 @@ namespace SixtenLabs.Spawn.Tests
 
     }
 
-    public override void MapSpecTypes()
+    public override void MapSpecTypes(TestRegistry registry)
     {
       var map = TypeMapper.Map<string, string>("bob");
     }

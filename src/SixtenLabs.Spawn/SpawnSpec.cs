@@ -4,7 +4,7 @@ namespace SixtenLabs.Spawn
 {
   public abstract class SpawnSpec<T> : ISpawnSpec<T> where T : class
   {
-    public SpawnSpec(XmlFileLoader xmlFileLoader, ISpecMapper specMapper, IDefinitionDictionary definitionDictionary)
+    public SpawnSpec(XmlFileLoader xmlFileLoader, ISpecMapper<T> specMapper, IDefinitionDictionary definitionDictionary)
     {
       FileLoader = xmlFileLoader;
       SpecMapper = specMapper;
@@ -30,7 +30,7 @@ namespace SixtenLabs.Spawn
     /// </summary>
     public T SpecTree { get; set; }
 
-    public ISpecMapper SpecMapper { get; }
+    public ISpecMapper<T> SpecMapper { get; }
 
     public IDefinitionDictionary DefinitionDictionary { get; }
   }

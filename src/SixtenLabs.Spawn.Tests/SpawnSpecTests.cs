@@ -11,7 +11,7 @@ namespace SixtenLabs.Spawn.Tests
       MockWebClientFactory = Substitute.For<WebClientFactory>();
       MockGeneratorSettings = Substitute.For<IGeneratorSettings>();
       MockFileLoader = Substitute.For<XmlFileLoader>(MockGeneratorSettings, MockWebClientFactory);
-      MockSpecMapper = Substitute.For<ISpecMapper>();
+      MockSpecMapper = Substitute.For<ISpecMapper<TestRegistry>>();
       MockDefinitionDictionary = Substitute.For<IDefinitionDictionary>();
 
       return new TestSpec(MockFileLoader, MockSpecMapper, MockDefinitionDictionary);
@@ -43,7 +43,7 @@ namespace SixtenLabs.Spawn.Tests
 
     private IWebClientFactory MockWebClientFactory { get; set; }
 
-    private ISpecMapper MockSpecMapper { get; set; }
+    private ISpecMapper<TestRegistry> MockSpecMapper { get; set; }
 
     private IDefinitionDictionary MockDefinitionDictionary { get; set; }
   }

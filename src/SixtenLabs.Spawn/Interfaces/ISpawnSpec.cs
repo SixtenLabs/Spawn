@@ -10,7 +10,7 @@ namespace SixtenLabs.Spawn
 
 		T SpecTree { get; }
 
-    ISpecMapper SpecMapper { get; }
+    ISpecMapper<T> SpecMapper { get; }
 
     IDefinitionDictionary DefinitionDictionary { get; }
   }

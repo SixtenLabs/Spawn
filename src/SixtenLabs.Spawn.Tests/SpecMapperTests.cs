@@ -20,7 +20,7 @@ namespace SixtenLabs.Spawn.Tests
     {
       var subject = SubjectUnderTest();
 
-      subject.MapSpecTypes();
+      subject.MapSpecTypes(new TestRegistry());
 
       MockTypeMapper.Received(1).Map<string, string>(Arg.Any<string>());
     }
