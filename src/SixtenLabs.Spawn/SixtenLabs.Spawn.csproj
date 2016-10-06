@@ -185,9 +185,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefinitionDictionary.cs" />
     <Compile Include="DefinitionName.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="CodeGenerator.cs" />
+    <Compile Include="IDefinitionDictionary.cs" />
     <Compile Include="Interfaces\ICodeGenerator.cs" />
     <Compile Include="Interfaces\IDefinition.cs" />
     <Compile Include="Interfaces\IOutputDefinition.cs" />

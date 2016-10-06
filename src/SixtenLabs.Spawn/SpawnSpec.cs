@@ -1,16 +1,14 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace SixtenLabs.Spawn
 {
   public abstract class SpawnSpec<T> : ISpawnSpec<T> where T : class
   {
-    public SpawnSpec(XmlFileLoader xmlFileLoader, ISpecMapper specMapper)
+    public SpawnSpec(XmlFileLoader xmlFileLoader, ISpecMapper specMapper, IDefinitionDictionary definitionDictionary)
     {
       FileLoader = xmlFileLoader;
       SpecMapper = specMapper;
+      DefinitionDictionary = definitionDictionary;
     }
 
     public void ProcessRegistry()
@@ -33,5 +31,7 @@ namespace SixtenLabs.Spawn
     public T SpecTree { get; set; }
 
     public ISpecMapper SpecMapper { get; }
+
+    public IDefinitionDictionary DefinitionDictionary { get; }
   }
 }

@@ -210,6 +210,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseCreatorTests.cs" />
+    <Compile Include="DefinitionDictionaryTests.cs" />
     <Compile Include="DefinitionNameTests.cs" />
     <Compile Include="Extensions\StringExtensionTests.cs" />
     <Compile Include="GeneratorSettingsTest.cs" />

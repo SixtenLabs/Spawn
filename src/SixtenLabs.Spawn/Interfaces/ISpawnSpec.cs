@@ -11,5 +11,7 @@ namespace SixtenLabs.Spawn
 		T SpecTree { get; }
 
     ISpecMapper SpecMapper { get; }
+
+    IDefinitionDictionary DefinitionDictionary { get; }
   }
 }
