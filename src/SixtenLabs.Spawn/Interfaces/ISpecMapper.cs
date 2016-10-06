@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SixtenLabs.Spawn
 {
-  public interface ISpecMapper
+  public interface ISpecMapper<T>
   {
-    void MapSpecTypes();
+    void MapSpecTypes(T registry);
   }
 }
