@@ -8,21 +8,21 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
   {
     public static ParameterSyntax CreateParameterDeclaration(this ParameterDefinition definition)
     {
-      var typeName = SF.IdentifierName(definition.ParameterType.Code);
+      var typeName = SF.IdentifierName(definition.ParameterType.Output);
 
       //var token = SF.VerbatimIdentifier(SF.TriviaList(), definition.Name.Code, "test", SF.TriviaList());
-      var token = SF.Identifier(definition.Name.Code);
+      var token = SF.Identifier(definition.Name.Output);
 
       TypeSyntax typeSyntax = null;
 
       if (definition.IsPointer)
       {
         // PointerType is hard code here. Need to determine the type from the definition and create appropriate type.
-        typeSyntax = SF.PointerType(SF.ParseTypeName(definition.ParameterType.Code));
+        typeSyntax = SF.PointerType(SF.ParseTypeName(definition.ParameterType.Output));
       }
       else
       {
-        typeSyntax = SF.ParseTypeName(definition.ParameterType.Code);
+        typeSyntax = SF.ParseTypeName(definition.ParameterType.Output);
       }
 
       var parameter = SF.Parameter(token).WithType(typeSyntax);

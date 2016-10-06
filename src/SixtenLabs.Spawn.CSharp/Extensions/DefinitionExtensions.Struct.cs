@@ -24,7 +24,7 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
         modifierTokens = modifierTokens.Insert(0, SF.Token(comments, SyntaxKind.XmlTextLiteralToken, SF.TriviaList()));
       }
 
-      var structDeclaration = SF.StructDeclaration(structDefinition.Name.Code)
+      var structDeclaration = SF.StructDeclaration(structDefinition.Name.Output)
         .WithModifiers(modifierTokens)
         .WithMembers(memberList);
 

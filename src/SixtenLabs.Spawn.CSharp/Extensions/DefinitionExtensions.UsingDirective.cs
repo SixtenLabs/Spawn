@@ -37,15 +37,15 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
     {
       if (usingDefinition.IsStatic)
       {
-        return StaticUsing(usingDefinition.Name.Code);
+        return StaticUsing(usingDefinition.Name.Output);
       }
       else if (usingDefinition.UseAlias)
       {
-        return AliasUsing(usingDefinition.Name.Code, usingDefinition.Alias);
+        return AliasUsing(usingDefinition.Name.Output, usingDefinition.Alias);
       }
       else
       {
-        return StandardUsing(usingDefinition.Name.Code);
+        return StandardUsing(usingDefinition.Name.Output);
       }
     }
 

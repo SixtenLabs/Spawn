@@ -7,7 +7,7 @@
   {
     public Definition(string name = null)
     {
-      Name.OriginalName = name;
+      Name.Original = name;
     }
 
     public DefinitionName Name { get; set; } = new DefinitionName();

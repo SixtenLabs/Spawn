@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SixtenLabs.Spawn.CSharp
+namespace SixtenLabs.Spawn
 {
   /// <summary>
   /// This is used for the name of a definition.
@@ -17,17 +17,21 @@ namespace SixtenLabs.Spawn.CSharp
   /// </summary>
   public class DefinitionName
   {
-    public string Code
+    /// <summary>
+    /// This should be used whenever generating code.
+    /// It will return Translated if it is set otherwise it will return Original
+    /// </summary>
+    public string Output
     {
       get
       {
-        if(!string.IsNullOrEmpty(TranslatedName))
+        if(!string.IsNullOrEmpty(Translated))
         {
-          return TranslatedName;
+          return Translated;
         }
-        else if(!string.IsNullOrEmpty(OriginalName))
+        else if(!string.IsNullOrEmpty(Original))
         {
-          return OriginalName;
+          return Original;
         }
         else
         {
@@ -40,12 +44,12 @@ namespace SixtenLabs.Spawn.CSharp
 		/// This name is typically the name used for this definition in the source data file.
 		/// This value will also be used for the Translated name if the translated name is not set.
 		/// </summary>
-    public string OriginalName { get; set; }
+    public string Original { get; set; }
 
     /// <summary>
     /// Use this to change the original name if needed.
     /// If this property is null or empty the OriginalName property will be used.
     /// </summary>
-    public string TranslatedName { get; set; }
+    public string Translated { get; set; }
   }
 }

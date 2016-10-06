@@ -12,16 +12,16 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
   {
     public static FieldDeclarationSyntax CreateFieldDeclaration(this FieldDefinition fieldDefinition)
     {
-      if (string.IsNullOrEmpty(fieldDefinition.ReturnType.Code))
+      if (string.IsNullOrEmpty(fieldDefinition.ReturnType.Output))
       {
         throw new ArgumentNullException("Field must have a return type.");
       }
 
       var modifiers = fieldDefinition.ModifierDefinitions.GetModifierTokens();
 
-      var returnTypeString = fieldDefinition.ReturnType.Code;
+      var returnTypeString = fieldDefinition.ReturnType.Output;
       var returnType = SF.VariableDeclaration(SF.IdentifierName(returnTypeString));
-      var fieldName = SF.VariableDeclarator(SF.Identifier(fieldDefinition.Name.Code));
+      var fieldName = SF.VariableDeclarator(SF.Identifier(fieldDefinition.Name.Output));
       var initializer = fieldDefinition.DefaultValue.GetInitializer();
       var attributes = fieldDefinition.AttributeDefinitions.GetAttributeDeclarations();
 

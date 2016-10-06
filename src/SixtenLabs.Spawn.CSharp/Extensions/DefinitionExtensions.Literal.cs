@@ -34,7 +34,7 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
 
     public static ExpressionSyntax GetObjectCreationExpression(this LiteralDefinition literalDefintion)
     {
-      var typeSyntax = SF.IdentifierName(literalDefintion.Name.Code);
+      var typeSyntax = SF.IdentifierName(literalDefintion.Name.Output);
 
       var objectExpressionDeclaration = SF.ObjectCreationExpression(typeSyntax);
 

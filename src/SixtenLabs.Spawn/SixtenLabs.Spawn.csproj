@@ -185,12 +185,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefinitionName.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="CodeGenerator.cs" />
     <Compile Include="Interfaces\ICodeGenerator.cs" />
     <Compile Include="Interfaces\IDefinition.cs" />
     <Compile Include="Interfaces\IOutputDefinition.cs" />
-    <Compile Include="IWebClientFactory.cs" />
+    <Compile Include="Interfaces\ISpecMapper.cs" />
+    <Compile Include="Interfaces\IWebClientFactory.cs" />
+    <Compile Include="IXmlFileLoader.cs" />
+    <Compile Include="SpecMapper.cs" />
     <Compile Include="SpecTypeDefinition.cs" />
     <Compile Include="Interfaces\ISpawn.cs" />
     <Compile Include="BaseCreator.cs" />

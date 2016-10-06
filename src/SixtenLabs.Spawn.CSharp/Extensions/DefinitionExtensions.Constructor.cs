@@ -17,7 +17,7 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
       var parameters = constructorDefinition.ParameterDefinitions.GetParameterDeclarations();
       var body = CreateBlock(constructorDefinition.BlockDefinition);
 
-      var constructorDeclaration = SF.ConstructorDeclaration(SF.Identifier(constructorDefinition.Name.Code))
+      var constructorDeclaration = SF.ConstructorDeclaration(SF.Identifier(constructorDefinition.Name.Output))
         .WithModifiers(modifiers);
 
       if (constructorDefinition.AttributeDefinitions.Count > 0)

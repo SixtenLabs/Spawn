@@ -1,133 +1,57 @@
 ﻿using Xunit;
 using FluentAssertions;
 using NSubstitute;
-using System;
 
 namespace SixtenLabs.Spawn.Tests
 {
-	public class SpawnSpecTests
-	{
-		private TestSpec SubjectUnderTest()
-		{
-			MockWebClientFactory = Substitute.For<WebClientFactory>();
-			MockGeneratorSettings = Substitute.For<IGeneratorSettings>();
-			MockFileLoader = Substitute.For<XmlFileLoader>(MockGeneratorSettings, MockWebClientFactory);
+    public class SpawnSpecTests
+    {
+        private TestSpec SubjectUnderTest()
+        {
+            MockWebClientFactory = Substitute.For<WebClientFactory>();
+            MockGeneratorSettings = Substitute.For<IGeneratorSettings>();
+            MockFileLoader = Substitute.For<XmlFileLoader>(MockGeneratorSettings, MockWebClientFactory);
+            MockSpecMapper = Substitute.For<ISpecMapper>();
 
-			return new TestSpec(MockFileLoader);
-		}
+            return new TestSpec(MockFileLoader, MockSpecMapper);
+        }
 
-		[Fact]
-		public void ProcessRegistry_FileLoader_LoadRegistryCalledOnce()
-		{
-			var subject = SubjectUnderTest();
+        [Fact]
+        public void ProcessRegistry_FileLoader_LoadRegistryCalledOnce()
+        {
+            var subject = SubjectUnderTest();
 
-			subject.ProcessRegistry();
+            subject.ProcessRegistry();
 
-			MockFileLoader.Received(1).LoadRegistry();
-		}
+            MockFileLoader.Received(1).LoadRegistry();
+        }
 
-		[Fact]
-		public void GetTranslatedName_NoSpecTypeDefinitionExists_ThrowsException()
-		{
-			var subject = SubjectUnderTest();
+        [Fact]
+        public void SpecTree_ShouldBe_Empty()
+        {
+            var subject = SubjectUnderTest();
 
-			Action act = () => subject.GetTranslatedName("Bob");
+            var actual = subject.SpecTree;
 
-			act.ShouldThrow<InvalidOperationException>($"Not allowed to not have a type mapping for: Bob");
-		}
+            actual.Should().BeNull();
+        }
 
-		[Fact]
-		public void GetTranslatedChildName_NoSpecTypeDefinitionExists_ThrowsException()
-		{
-			var subject = SubjectUnderTest();
+        //[Fact]
+        //public void CreateSpecTree_ShouldBe_Empty()
+        //{
+        //  var subject = SubjectUnderTest();
 
-			Action act = () => subject.GetTranslatedChildName("Bob", "Timothy");
+        //  var actual = subject.CreateSpecTree(;
 
-			act.ShouldThrow<InvalidOperationException>($"Not allowed to not have a type mapping for: Bob");
-		}
+        //  actual.Should().BeNull();
+        //}
 
-		[Fact]
-		public void GetTranslatedChildName_NoChildSpecTypeDefinitionExists_ThrowsException()
-		{
-			var subject = SubjectUnderTest();
+        private IGeneratorSettings MockGeneratorSettings { get; set; }
 
-			var specTypeDef = new SpecTypeDefinition() { SpecName = "Robert", TranslatedName = "Bob" };
-			subject.AddSpecTypeDefinition(specTypeDef);
+        private XmlFileLoader MockFileLoader { get; set; }
 
-			Action act = () => subject.GetTranslatedChildName("Robert", "Timothy");
+        private IWebClientFactory MockWebClientFactory { get; set; }
 
-			act.ShouldThrow<InvalidOperationException>($"Not allowed to not have a type mapping for: Timothy");
-		}
-
-		[Fact]
-		public void AddSpecTypeDefinition_NewSpecDef_SpecTypeCountCorrect()
-		{
-			var subject = SubjectUnderTest();
-
-			var specTypeDef = new SpecTypeDefinition() { SpecName = "Robert", TranslatedName = "Bob" };
-
-			subject.AddSpecTypeDefinition(specTypeDef);
-
-			subject.SpecTypeCount.Should().Be(1);
-		}
-		
-		[Fact]
-		public void AddSpecTypeDefinition_SpecTypeDefinitionExists_ThrowsException()
-		{
-			var subject = SubjectUnderTest();
-
-			var specTypeDef = new SpecTypeDefinition() { SpecName = "Robert", TranslatedName = "Bob" };
-			subject.AddSpecTypeDefinition(specTypeDef);
-
-			Action act = () => subject.AddSpecTypeDefinition(specTypeDef);
-
-			act.ShouldThrow<InvalidOperationException>($"SpecTypeDefinition for {specTypeDef.SpecName} already exists.");
-		}
-
-		[Fact]
-		public void GetTranslatedName_SpecTypeExists_ReturnsTranslatedName()
-		{
-			var subject = SubjectUnderTest();
-
-			var specTypeDef = new SpecTypeDefinition() { SpecName = "Robert", TranslatedName = "Bob" };
-			subject.AddSpecTypeDefinition(specTypeDef);
-
-			var actual = subject.GetTranslatedName("Robert");
-
-			actual.Should().Be("Bob");
-		}
-
-		[Fact]
-		public void GetTranslatedChildName_SpecTypeExists_ReturnsTranslatedName()
-		{
-			var subject = SubjectUnderTest();
-
-			var specTypeDef = new SpecTypeDefinition() { SpecName = "Robert", TranslatedName = "Bob" };
-			specTypeDef.Children.Add(new SpecTypeDefinition() { SpecName = "Timothy", TranslatedName = "Tim" });
-			subject.AddSpecTypeDefinition(specTypeDef);
-
-			var actual = subject.GetTranslatedChildName("Robert", "Timothy");
-
-			actual.Should().Be("Tim");
-		}
-
-		[Fact]
-		public void SpecTree_xx_xx()
-		{
-			var subject = SubjectUnderTest();
-
-			var specTypeDef = new SpecTypeDefinition() { SpecName = "Robert", TranslatedName = "Bob" };
-			subject.AddSpecTypeDefinition(specTypeDef);
-
-			var actual = subject.SpecTree;
-
-			MockFileLoader.Received(1).Registry = null;
-		}
-
-		private IGeneratorSettings MockGeneratorSettings { get; set; }
-
-		private XmlFileLoader MockFileLoader { get; set; }
-
-		private IWebClientFactory MockWebClientFactory { get; set; }
-	}
+        private ISpecMapper MockSpecMapper { get; set; }
+    }
 }

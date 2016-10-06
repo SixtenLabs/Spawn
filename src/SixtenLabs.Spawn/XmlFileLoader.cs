@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Text;
 using System.Xml.Linq;
-using System.Xml.Serialization;
 
 namespace SixtenLabs.Spawn
 {
@@ -9,8 +8,8 @@ namespace SixtenLabs.Spawn
 	/// This class is responsible for loading the xml file
 	/// and serializing it to the classes generated from the xsd.
 	/// </summary>
-	public class XmlFileLoader
-	{
+	public class XmlFileLoader : IXmlFileLoader
+  {
 		public XmlFileLoader(IGeneratorSettings parseSettings, IWebClientFactory webClientFactory)
 		{
 			ParseSettings = parseSettings;

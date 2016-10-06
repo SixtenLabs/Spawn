@@ -22,7 +22,7 @@ namespace SixtenLabs.Spawn.CSharp.FluentDefinitions
 
     public static FieldDefinition WithReturnType(this FieldDefinition definition, string returnType)
     {
-      definition.ReturnType.OriginalName = returnType;
+      definition.ReturnType.Original = returnType;
 
       return definition;
     }

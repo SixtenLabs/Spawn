@@ -13,7 +13,7 @@ namespace SixtenLabs.Spawn.CSharp.FluentDefinitions
   {
     public static ParameterDefinition WithParameterType(this ParameterDefinition definition, string returnType)
     {
-      definition.ParameterType.OriginalName = returnType;
+      definition.ParameterType.Original = returnType;
 
       return definition;
     }

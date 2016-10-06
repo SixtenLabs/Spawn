@@ -189,7 +189,6 @@
     <Compile Include="Definitions\DocumentationCommentDefinition.cs" />
     <Compile Include="Definitions\ConstructorDefinition.cs" />
     <Compile Include="Definitions\Definition.cs" />
-    <Compile Include="Definitions\DefinitionName.cs" />
     <Compile Include="Definitions\DelegateDefinition.cs" />
     <Compile Include="Definitions\EnumDefinition.cs" />
     <Compile Include="Definitions\EnumMemberDefinition.cs" />

@@ -10,11 +10,11 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
     public static MethodDeclarationSyntax CreateMethodDeclaration(this MethodDefinition methodDefinition)
     {
       var modifiers = GetModifierTokens(methodDefinition.ModifierDefinitions);
-      var returnType = SF.ParseTypeName(methodDefinition.ReturnType.Code);
+      var returnType = SF.ParseTypeName(methodDefinition.ReturnType.Output);
       var parameters = methodDefinition.ParameterDefinitions.GetParameterDeclarations();
       
 
-      var declaration = SF.MethodDeclaration(returnType, SF.Identifier(methodDefinition.Name.Code))
+      var declaration = SF.MethodDeclaration(returnType, SF.Identifier(methodDefinition.Name.Output))
         .WithModifiers(modifiers)
         .WithParameterList(parameters);
 

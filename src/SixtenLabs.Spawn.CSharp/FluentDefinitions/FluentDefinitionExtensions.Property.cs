@@ -28,7 +28,7 @@ namespace SixtenLabs.Spawn.CSharp.FluentDefinitions
 
     public static PropertyDefinition WithReturnType(this PropertyDefinition definition, string returnType)
     {
-      definition.ReturnType.OriginalName = returnType;
+      definition.ReturnType.Original = returnType;
 
       return definition;
     }

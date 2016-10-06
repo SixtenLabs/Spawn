@@ -9,15 +9,5 @@ namespace SixtenLabs.Spawn
 		void CreateSpecTree(IMapper mapper);
 
 		T SpecTree { get; }
-
-		SpecTypeDefinition FindTypeDefinition(string specName);
-
-		string GetTranslatedName(string specName);
-
-		string GetTranslatedChildName(string specName, string childSpecName);
-
-		void AddSpecTypeDefinition(SpecTypeDefinition specTypeDefinition);
-
-		int SpecTypeCount { get; }
 	}
 }

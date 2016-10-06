@@ -24,7 +24,7 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
 
     public static EnumDeclarationSyntax CreateEnumDeclaration(this EnumDefinition enumDefinition)
     {
-      if (string.IsNullOrEmpty(enumDefinition.Name.Code))
+      if (string.IsNullOrEmpty(enumDefinition.Name.Output))
       {
         throw new ArgumentNullException("Enum must at least have a valid SpecName property set.");
       }
@@ -33,7 +33,7 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
       var modifiers = enumDefinition.ModifierDefinitions.GetModifierTokens();
       var attributes = enumDefinition.AttributeDefinitions.GetAttributeDeclarations();
 
-      var enumDeclaration = SF.EnumDeclaration(enumDefinition.Name.Code)
+      var enumDeclaration = SF.EnumDeclaration(enumDefinition.Name.Output)
         .WithModifiers(modifiers)
         .WithMembers(SF.SeparatedList(members));
 

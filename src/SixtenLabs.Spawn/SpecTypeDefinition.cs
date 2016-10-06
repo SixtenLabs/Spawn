@@ -11,9 +11,7 @@ namespace SixtenLabs.Spawn
 	/// </summary>
 	public class SpecTypeDefinition : IDefinition
 	{
-		public string SpecName { get; set; }
-
-		public string TranslatedName { get; set; }
+    public DefinitionName Name { get; set; } = new DefinitionName();
 
 		/// <summary>
 		/// This is used to capture meta data about parameters, properties, and method names

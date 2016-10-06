@@ -12,13 +12,13 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
 
       foreach (var arg in attributeDefinition.ArgumentDefinitions)
       {
-        var argument = SF.AttributeArgument(SF.IdentifierName(arg.Name.Code));
+        var argument = SF.AttributeArgument(SF.IdentifierName(arg.Name.Output));
         arguments.Add(argument);
       }
 
       var attributeArgList = SF.AttributeArgumentList(SF.SeparatedList(arguments));
 
-      var declaration = SF.Attribute(SF.IdentifierName(attributeDefinition.Name.Code), attributeArgList);
+      var declaration = SF.Attribute(SF.IdentifierName(attributeDefinition.Name.Output), attributeArgList);
 
       return declaration;
     }

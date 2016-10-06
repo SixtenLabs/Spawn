@@ -19,7 +19,7 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
 
       var modifierTokens = GetModifierTokens(classDefinition.ModifierDefinitions);
 
-      var classDeclaration = SF.ClassDeclaration(classDefinition.Name.Code)
+      var classDeclaration = SF.ClassDeclaration(classDefinition.Name.Output)
         .WithModifiers(modifierTokens)
         .WithMembers(memberList);
 

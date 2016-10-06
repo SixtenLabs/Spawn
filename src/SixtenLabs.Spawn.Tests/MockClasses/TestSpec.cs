@@ -2,8 +2,8 @@
 {
 	public class TestSpec : SpawnSpec<TestRegistry>
 	{
-		public TestSpec(XmlFileLoader xmlFileLoader)
-			: base(xmlFileLoader)
+		public TestSpec(XmlFileLoader xmlFileLoader, ISpecMapper specMapper)
+			: base(xmlFileLoader, specMapper)
 		{
 		}
 	}

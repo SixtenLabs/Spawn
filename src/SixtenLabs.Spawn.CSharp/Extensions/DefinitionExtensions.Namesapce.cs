@@ -12,7 +12,7 @@ namespace SixtenLabs.Spawn.CSharp.Extensions
         return null;
       }
 
-      return SF.NamespaceDeclaration(SF.IdentifierName(@namespace.Name.Code));
+      return SF.NamespaceDeclaration(SF.IdentifierName(@namespace.Name.Output));
     }
   }
 }

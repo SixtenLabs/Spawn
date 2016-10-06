@@ -16,7 +16,7 @@
 
     public static MethodDefinition WithReturnType(this MethodDefinition definition, string returnType)
     {
-      definition.ReturnType.OriginalName = returnType;
+      definition.ReturnType.Original = returnType;
 
       return definition;
     }
