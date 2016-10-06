@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SixtenLabs.Spawn
 {
-  public class DefinitionDictionary
+  public class DefinitionDictionary : IDefinitionDictionary
   {
     public string GetTranslatedName(string specName)
     {
