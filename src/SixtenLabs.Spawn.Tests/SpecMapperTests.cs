@@ -12,7 +12,7 @@ namespace SixtenLabs.Spawn.Tests
     {
       MockTypeMapper = Substitute.For<IMapper>();
       
-      return new TestSpecMapper(MockTypeMapper);
+      return new TestSpecMapper();
     }
 
     [Fact]
@@ -20,7 +20,7 @@ namespace SixtenLabs.Spawn.Tests
     {
       var subject = SubjectUnderTest();
 
-      subject.MapSpecTypes(new TestRegistry());
+      subject.MapSpecTypes(MockTypeMapper, new TestRegistry());
 
       MockTypeMapper.Received(1).Map<string, string>(Arg.Any<string>());
     }

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 
 namespace SixtenLabs.Spawn
 {
   public interface ISpecMapper<T>
   {
-    void MapSpecTypes(T registry);
+    void MapSpecTypes(IMapper mapper, T registry);
   }
 }
